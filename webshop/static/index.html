@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>ShopIT</title>
+        <link href="css/layout.css" rel="stylesheet">
+  		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body ng-app="webShopApp">
+        <ul>
+            <li><a class="active" ng-href="" href>Home</a></li>
+            <li><a ng-href="/#/shoppingCart" href>Shopping Cart</a></li>
+            <li><a ng-href="/#/registerSeller" href>Register seller</a></li>
+            <li><a ng-href="/#/profile" href>My profile</a></li>
+            <li style="float: right; margin-right: 20px;">
+				<a ng-href="/#/login" href>Log in</a>
+			</li>
+            <li style="float: right;">
+				<a ng-href="/#/signup" href>Sign up</a>
+			</li>
+        </ul>
+		
+		<div class="logoDiv">
+			<a ng-href="#">
+				<img style="text-align:center" src="img/shopit.png">
+			</a>
+		</div>
+
+	  	<div ng-view></div>
+	  	
+  		<script src="js/additions/jquery-3.2.1.min.js"></script>
+	  	<script src="js/additions/angular.js"></script>
+	  	<script src="js/additions/angular-route.js"></script>
+		<script src="js/additions/lodash.js"></script>
+	  	<script src="js/additions/restangular.js"></script>
+		<script src="js/additions/angular-lodash-module.js"></script>
+	  	<script src="js/additions/bootstrap.min.js"></script>
+	  	
+	  	<script src="js/app.js"></script>
+	  	
+	  	<script src="js/controllers/mainController.js"></script>
+	  	<script src="js/controllers/itemController.js"></script>
+	  	<script src="js/services/mainService.js"></script>
+	  	<script src="js/services/itemService.js"></script>
+        
+    </body>
+</html>
