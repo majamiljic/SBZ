@@ -10,5 +10,11 @@ function MainService(Restangular) {
 		});
 	};
 
+	retVal.getCategories = function() {
+		return Restangular.all('items/getCategories').getList().then(function(results) {
+			return results;
+		});
+	};
+
 	return retVal;
 }

@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <div class="mainDiv">
 	<h2 style="text-align: center"> <b>Items</b> </h2> <br>
 	
@@ -19,55 +20,44 @@
 		<!--Category panel-->
 		<div class="col-sm-4">
 			<div class="panel panel-default">
+			
 				<div class="panel-heading" data-toggle="collapse" href="#collapse1" style="cursor:pointer">
 					<h4 class="panel-title">
-						<a style="text-decoration : none"> <b>Category</b> </a>
+						<a style="text-decoration : none">
+							<b>Category</b>
+							<span style="vertical-align: bottom" class="glyphicon glyphicon-chevron-down"></span>
+						</a>
 					</h4>
 				</div>
+				
 				<div id="collapse1" class="panel-collapse collapse">
 					<div class="panel-body" align="left">
 						<form>
-							<div class="col-sm-6">
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Christmas decoration</label>
-								</div>
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Consumer electronic</label>
-								</div>
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Household appliance</label>
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Kitchen appliance</label>
-								</div>
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Household chemicals</label>
-								</div>
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Snacks</label>
-								</div>
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Drinks</label>
-								</div>
+							<div class="checkbox" ng-repeat="category in mainCtrl.categories">
+								<label>
+									<input type="checkbox" value=""> {{category.name}}
+								</label>
 							</div>
 						</form>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 
 		<!--Price panel-->
 		<div class="col-sm-4">
 			<div class="panel panel-default">
+			
 				<div class="panel-heading" data-toggle="collapse" href="#collapse2" style="cursor:pointer">
 					<h4 class="panel-title">
 						<a style="text-decoration : none">
 							<b>Price</b>
+							<span style="vertical-align: bottom" class="glyphicon glyphicon-chevron-down"></span>
 						</a>
 					</h4>
 				</div>
+				
 				<div id="collapse2" class="panel-collapse collapse">
 					<div class="panel-body">
 						<div class="col-sm-6">
@@ -82,110 +72,12 @@
 						<input type="submit" class="btn btn-default" value="Submit" style="width: 80%">
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
 	
 	<!---------------------- ITEM LIST SECTION ---------------------->
-	<div class="row" align="center">
-		<div class="col-sm-4" ng-repeat="item in items">
-			<div class="itemDiv">
-				<a href="#">
-					<img src="img/2.jpg" style="border-radius: 15px;">
-				</a>
-				<div class="descriptionDiv">
-					<p>
-						<a href="#" style="text-decoration : none">
-							<b style="color:orange"> {{item.name}} </b>
-						</a>
-						<br>
-						<b>Code:</b> {{item.code}}				<br>
-						<b>Category:</b> {{item.category.name}}	<br>
-						<b>Price:</b> {{item.price}} EUR		<br>
-						<b>Max Discount:</b> {{item.category.maxDiscount}}%		<br>
-						<input type="number" class="form-control" min="0" style="width: 25%; float: left; margin-left: 10%">
-						<button type="submit" class="btn btn-default" style="float: right; margin-right: 10%">
-							<b>Add to cart</b> &nbsp;
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
-					</p>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<!-- <div class="row" align="center">
-		<div class="col-sm-4">
-			<div class="itemDiv">
-				<a href="#">
-					<img src="img/2.jpg" style="border-radius: 15px;">
-				</a>
-				<div class="descriptionDiv">
-					<p>
-						<a href="#" style="text-decoration : none">
-							<b style="color:orange"> Chips </b>
-						</a>
-						<br>
-						<b>Code:</b> 1CEF			<br>
-						<b>Category:</b> Snacks	<br>
-						<b>Price:</b> 1.99 EUR		<br>
-						<b>Discount:</b> 10%		<br>
-						<input type="number" class="form-control" min="0" style="width: 25%; float: left; margin-left: 10%">
-						<button type="submit" class="btn btn-default" style="float: right; margin-right: 10%">
-							<b>Add to cart</b> &nbsp;
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="itemDiv">
-				<a href="#">
-					<img src="img/2.jpg" style="border-radius: 15px;">
-				</a>
-				<div class="descriptionDiv">
-					<p>
-						<a href="#" style="text-decoration : none">
-							<b style="color:orange"> Chips </b>
-						</a>
-						<br>
-						<b>Code:</b> 1CEF			<br>
-						<b>Category:</b> Snacks	<br>
-						<b>Price:</b> 1.99 EUR		<br>
-						<b>Discount:</b> 10%		<br>
-						<input type="number" class="form-control" min="0" style="width: 25%; float: left; margin-left: 10%">
-						<button type="submit" class="btn btn-default" style="float: right; margin-right: 10%">
-							<b>Add to cart</b> &nbsp;
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="itemDiv">
-				<a href="#">
-					<img src="img/2.jpg" style="border-radius: 15px;">
-				</a>
-				<div class="descriptionDiv">
-					<p>
-						<a href="#" style="text-decoration : none">
-							<b style="color:orange"> Chips </b>
-						</a>
-						<br>
-						<b>Code:</b> 1CEF			<br>
-						<b>Category:</b> Snacks	<br>
-						<b>Price:</b> 1.99 EUR		<br>
-						<b>Discount:</b> 10%		<br>
-						<input type="number" class="form-control" min="0" style="width: 25%; float: left; margin-left: 10%">
-						<button type="submit" class="btn btn-default" style="float: right; margin-right: 10%">
-							<b>Add to cart</b> &nbsp;
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div> -->
+	<div ng-include="'views/items.html'"></div>
+	
 </div>

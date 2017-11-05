@@ -1,7 +1,8 @@
 (function(angular) {
 	'use strict';
 	
-	angular.module('webShopApp', ['ngRoute', 'restangular', 'lodash', 'main']).config(configure).run(runBlock);
+	angular.module('webShopApp', ['ngRoute', 'restangular', 'ngStorage', 'lodash',
+	                              'main', 'items', 'cart']).config(configure).run(runBlock);
 	configure.$inject = ['$routeProvider', 'RestangularProvider'];
 	runBlock.$inject = ['Restangular'];
 	
@@ -19,7 +20,9 @@
 		}).when('/registerSeller', {
 			templateUrl : 'views/registerSeller.html'
 		}).when('/shoppingCart', {
-			templateUrl : 'views/shoppingCart.html'
+			templateUrl : 'views/shoppingCart.html',
+			controller  : 'ShoppingCartController',
+			controllerAs: 'cartCtrl'
 		}).otherwise({
 			redirectTo : '/'
 		});
@@ -27,6 +30,7 @@
 	
 	function runBlock(Restangular, $log) {
 		Restangular.setBaseUrl('webshop');
+		
 		Restangular.setErrorInterceptor(function(response) {
 			if (response.status === 500) {
 				$log.info("internal server error");
