@@ -1,9 +1,9 @@
 (function(angular) {
 	'use strict';
 	angular.module('main', []).controller('MainController', MainController);
-	MainController.$inject = ['$scope', '$localStorage', 'MainService'];
+	MainController.$inject = ['$localStorage', 'MainService'];
 
-	function MainController($scope, $localStorage, MainService) {
+	function MainController($localStorage, MainService) {
 		var vm = this;
 		var cart = [];
 		if($localStorage.cart == null)
@@ -17,7 +17,7 @@
 			vm.categories = categories;
 	 	});
 		
-		$scope.addToCart = function(item) {
+		vm.addToCart = function(item) {
 			var numberOfItems = document.getElementById("numberOfItems" + item.id).value;
 			if (numberOfItems == 0)
 				numberOfItems = 1;
