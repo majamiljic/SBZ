@@ -2,7 +2,6 @@ angular.module('items').factory('ItemService', ItemService);
 ItemService.$inject = ['Restangular'];
 
 function ItemService(Restangular) {
-
 	var retVal = {};
 
 	retVal.getItems = function() {

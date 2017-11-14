@@ -7,8 +7,16 @@
 				<b>Email <span style="color: red">*</span></b>
 			</div>
 			<div class="col-sm-8">
-				<input class="form-control" type="email" required
-					style="margin-left: 20px">
+				<input class="form-control" type="email" required style="margin-left: 20px" ng-model="userCtrl.seller.email">
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-sm-3">
+				<b>Password <span style="color: red">*</span></b>
+			</div>
+			<div class="col-sm-8">
+				<input class="form-control" type="password" required style="margin-left: 20px" ng-model="userCtrl.seller.password">
 			</div>
 		</div>
 		<br>
@@ -17,8 +25,7 @@
 				<b>Name <span style="color: red">*</span></b>
 			</div>
 			<div class="col-sm-8">
-				<input class="form-control" type="text" required
-					style="margin-left: 20px">
+				<input class="form-control" type="text" required style="margin-left: 20px" ng-model="userCtrl.seller.name">
 			</div>
 		</div>
 		<br>
@@ -27,22 +34,11 @@
 				<b>Surname <span style="color: red">*</span></b>
 			</div>
 			<div class="col-sm-8">
-				<input class="form-control" type="text" required
-					style="margin-left: 20px">
+				<input class="form-control" type="text" required style="margin-left: 20px" ng-model="userCtrl.seller.surname">
 			</div>
 		</div>
 		<br>
-		<div class="row">
-			<div class="col-sm-3">
-				<b>Address <span style="color: red">*</span></b>
-			</div>
-			<div class="col-sm-8">
-				<input class="form-control" type="text" required
-					style="margin-left: 20px">
-			</div>
-		</div>
-
-		<br> <input type="submit" class="btn btn-warning"
-			style="width: 60%; margin-left: 20%;" value="Submit">
+		<input type="submit" class="btn btn-warning" style="width: 60%; margin-left: 20%;"
+				value="Submit" ng-click="userCtrl.registerSeller(userCtrl.seller)">
 	</form>
 </div>

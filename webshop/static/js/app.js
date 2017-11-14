@@ -1,8 +1,9 @@
 (function(angular) {
 	'use strict';
 	
-	angular.module('webShopApp', ['ngRoute', 'restangular', 'ngStorage', 'lodash',
-	                              'main', 'items', 'cart']).config(configure).run(runBlock);
+	angular.module('webShopApp',
+			['ngRoute', 'restangular', 'ngStorage', 'lodash', 'main', 'items', 'cart', 'user'])
+			.config(configure).run(runBlock);
 	configure.$inject = ['$routeProvider', 'RestangularProvider'];
 	runBlock.$inject = ['Restangular'];
 	
@@ -18,7 +19,9 @@
 		}).when('/profile', {
 			templateUrl : 'views/profile.html'
 		}).when('/registerSeller', {
-			templateUrl : 'views/registerSeller.html'
+			templateUrl : 'views/registerSeller.html',
+			controller  : 'UserController',
+			controllerAs: 'userCtrl'
 		}).when('/shoppingCart', {
 			templateUrl : 'views/shoppingCart.html',
 			controller  : 'ShoppingCartController',
