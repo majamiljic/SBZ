@@ -2,20 +2,27 @@
 	'use strict';
 	
 	angular.module('webShopApp',
-			['ngRoute', 'restangular', 'ngStorage', 'lodash', 'main', 'items', 'cart', 'user'])
+			['ngRoute', 'restangular', 'ngStorage', 'lodash', 'main', 'items', 'cart', 'user', 'login'])
 			.config(configure).run(runBlock);
+	
 	configure.$inject = ['$routeProvider', 'RestangularProvider'];
-	runBlock.$inject = ['Restangular'];
+	runBlock.$inject = ['Restangular', '$log'];
 	
 	function configure($routeProvider, RestangularProvider) {
 		$routeProvider.when('/', {
+			templateUrl : 'views/welcome.html'
+		}).when('/main', {
 			templateUrl : 'views/main.html',
 			controller  : 'MainController',
 			controllerAs: 'mainCtrl'
 		}).when('/login', {
-			templateUrl : 'views/login.html'
+			templateUrl : 'views/login.html',
+			controller  : 'LoginController',
+			controllerAs: 'loginCtrl'
 		}).when('/signup', {
-			templateUrl : 'views/signup.html'
+			templateUrl : 'views/signup.html',
+			controller  : 'LoginController',
+			controllerAs: 'loginCtrl'
 		}).when('/profile', {
 			templateUrl : 'views/profile.html'
 		}).when('/registerSeller', {

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import sbz.webshop.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
-
+	public User findOneByEmail(String email);
 }

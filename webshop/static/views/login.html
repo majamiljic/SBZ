@@ -1,4 +1,9 @@
 <div class="loginDiv">
+
+	<div class="alert alert-danger" id="alert" style="text-align: center">
+		<strong>Wrong email or password!</strong>
+	</div>
+	
 	<form>
 		<h3 style="text-align: center">Log in!</h3>
 		<br>
@@ -7,7 +12,7 @@
 				<b>Email</b>
 			</div>
 			<div class="col-sm-9">
-				<input class="form-control" type="email">
+				<input class="form-control" type="email" ng-model="loginCtrl.loginUser.email" autofocus="autofocus">
 			</div>
 		</div>
 		<br>
@@ -16,11 +21,11 @@
 				<b>Password</b>
 			</div>
 			<div class="col-sm-9">
-				<input class="form-control" type="password">
+				<input class="form-control" type="password" ng-model="loginCtrl.loginUser.password">
 			</div>
 		</div>
-
-		<br> <input type="submit" class="btn btn-warning"
-			style="margin-left: 30%; width: 45%;" value="Log in">
+		<br>
+		<input type="submit" class="btn btn-warning" style="margin-left: 30%; width: 45%;"
+		value="Log in" ng-click="loginCtrl.login()">
 	</form>
 </div>

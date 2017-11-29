@@ -4,6 +4,10 @@
 		<b>Shopping Cart</b>
 	</h2>
 	<br>
+	
+	<h3 ng-if="cartCtrl.shoppingCart[0] == null" style="text-align: center">
+		Shopping Cart is currently empty.
+	</h3>
 
 	<!---------------------- INVOICE ITEM LIST SECTION ---------------------->
 	<div class="invoiceItemDiv" ng-repeat="element in cartCtrl.shoppingCart">
@@ -35,7 +39,7 @@
 	</div>
 
 	<!---------------------- INVOICE TOTAL SECTION ---------------------->
-	<div class="totalDiv">
+	<div class="totalDiv" ng-if="cartCtrl.shoppingCart[0] != null">
 		<b>Subtotal:</b> 200 $ <br> <b>Discount:</b> 20 % <br>
 		<hr style="border-top: 3px solid gray">
 		<b>Total:</b> 180 $ <br>

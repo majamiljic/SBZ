@@ -5,21 +5,32 @@
   		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
     </head>
     <body ng-app="webShopApp">
-        <ul>
-            <li><a class="active" ng-href="" href>Home</a></li>
-            <li><a ng-href="/#!/shoppingCart" href>Shopping Cart</a></li>
-            <li><a ng-href="/#!/registerSeller" href>Register seller</a></li>
-            <li><a ng-href="/#!/profile" href>My profile</a></li>
-            <li style="float: right; margin-right: 20px;">
+        <ul ng-controller="LoginController as loginCtrl">
+            <li ng-show="!loginCtrl.loggedUser()">
+            	<a ng-href="/#!/main" href>Start Shopping</a>
+            </li>
+            <li ng-if="!loginCtrl.loggedUser() && !loginCtrl.seller() && !loginCtrl.manager()">
+            	<a ng-href="/#!/shoppingCart" href>Shopping Cart</a>
+            </li>
+            <li ng-if="loginCtrl.manager()">
+            	<a ng-href="/#!/registerSeller" href>Register seller</a>
+            </li>
+            <li ng-if="!loginCtrl.loggedUser()">
+            	<a ng-href="/#!/profile" href>My profile</a>
+            </li>
+            <li style="float: right; margin-right: 20px;" ng-show="loginCtrl.loggedUser()">
 				<a ng-href="/#!/login" href>Log in</a>
 			</li>
-            <li style="float: right;">
+			<li style="float: right; margin-right: 20px;" ng-show="!loginCtrl.loggedUser()">
+				<a href="" ng-click="loginCtrl.logout()">Log Out</a>
+			</li>
+            <li style="float: right;" ng-show="loginCtrl.loggedUser()">
 				<a ng-href="/#!/signup" href>Sign up</a>
 			</li>
         </ul>
 		
 		<div class="logoDiv">
-			<a ng-href="#">
+			<a ng-href="/#!/main">
 				<img style="text-align:center" src="img/shopit.png">
 			</a>
 		</div>
@@ -41,6 +52,7 @@
 	  	<script src="js/controllers/itemController.js"></script>
 	  	<script src="js/controllers/cartController.js"></script>
 	  	<script src="js/controllers/userController.js"></script>
+	  	<script src="js/controllers/loginController.js"></script>
 	  	<script src="js/services/mainService.js"></script>
 	  	<script src="js/services/itemService.js"></script>
 	  	<script src="js/services/cartService.js"></script>
