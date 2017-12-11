@@ -4,32 +4,36 @@
 	<br>
 	<table class="table table-striped">
 		<tr>
+			<td><b>Email:</b></td>
+			<td>{{userCtrl.user.email}}</td>
+		</tr>
+		<tr>
 			<td><b>Name:</b></td>
-			<td>Smith</td>
+			<td>{{userCtrl.user.name}}</td>
 		</tr>
 		<tr>
 			<td><b>Surname:</b></td>
-			<td>Jackson</td>
+			<td>{{userCtrl.user.surname}}</td>
 		</tr>
 		<tr>
 			<td><b>Role:</b></td>
-			<td>Shopper</td>
+			<td>{{userCtrl.user.role}}</td>
 		</tr>
 		<tr>
 			<td><b>Reg Date:</b></td>
-			<td>19.09.2017.</td>
+			<td>{{userCtrl.regDate}}</td>
 		</tr>
 		<tr>
 			<td><b>Address:</b></td>
-			<td>Balzakova 7</td>
+			<td>{{userCtrl.user.usersProfile.address}}</td>
 		</tr>
 		<tr>
 			<td><b>Points:</b></td>
-			<td>10000</td>
+			<td>{{userCtrl.user.usersProfile.points}}</td>
 		</tr>
 		<tr>
 			<td><b>Category:</b></td>
-			<td>Golden</td>
+			<td>{{userCtrl.user.usersProfile.buyerCategory.name}}</td>
 		</tr>
 	</table>
 </div>

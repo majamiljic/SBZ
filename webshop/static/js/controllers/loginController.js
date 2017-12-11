@@ -42,7 +42,6 @@
 		}
 		
 		vm.login = function(){
-			console.log(vm.loginUser);
 			UserService.login(vm.loginUser).then(function(response){
 				if(response != null){
 					$localStorage.user = response;
@@ -56,7 +55,7 @@
 			UserService.registrate(vm.regUser).then(function(response) {
 				if(response != null){
 					$localStorage.user = response;
-					$location.path('/main');
+					$location.path('/login');
 				}
 			});
 		}

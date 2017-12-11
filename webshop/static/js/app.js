@@ -24,13 +24,19 @@
 			controller  : 'LoginController',
 			controllerAs: 'loginCtrl'
 		}).when('/profile', {
-			templateUrl : 'views/profile.html'
+			templateUrl : 'views/profile.html',
+			controller  : 'UserController',
+			controllerAs: 'userCtrl'
 		}).when('/registerSeller', {
 			templateUrl : 'views/registerSeller.html',
 			controller  : 'UserController',
 			controllerAs: 'userCtrl'
 		}).when('/shoppingCart', {
 			templateUrl : 'views/shoppingCart.html',
+			controller  : 'ShoppingCartController',
+			controllerAs: 'cartCtrl'
+		}).when('/checkoutCounter', {
+			templateUrl : 'views/checkoutCounter.html',
 			controller  : 'ShoppingCartController',
 			controllerAs: 'cartCtrl'
 		}).otherwise({

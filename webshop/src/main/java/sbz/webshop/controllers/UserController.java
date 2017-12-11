@@ -37,6 +37,9 @@ public class UserController {
 		User user = userService.findOneByEmail(loginUser.getEmail());
 		if(user == null)
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+		
+		if(!user.getPassword().equals(loginUser.getPassword()))
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}

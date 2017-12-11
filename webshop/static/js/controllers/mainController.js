@@ -21,15 +21,30 @@
 			var numberOfItems = document.getElementById("numberOfItems" + item.id).value;
 			if (numberOfItems == 0)
 				numberOfItems = 1;
+			
 			document.getElementById("addToCartButton" + item.id).disabled = true;
 			
-			console.log($localStorage.cart);
+			if (!itemExists(item.id, numberOfItems))
+				$localStorage.cart.push({"item" : item, "numberOfItems" : numberOfItems});
+		}
+		
+		var itemExists = function(id, numberOfItems) {
+			var retVals = [];
 			for (var i = 0; i < $localStorage.cart.length; i++) {
-				if ($localStorage.cart[i].item.id == item.id)
-					$localStorage.cart[i].numberOfItems++;
+				var itemsNo = Number($localStorage.cart[i].numberOfItems);
+				if ($localStorage.cart[i].item.id == id) {
+					itemsNo += Number(numberOfItems);
+					$localStorage.cart[i].numberOfItems = itemsNo;
+					retVals.push("true");
+				}
+				else
+					retVals.push("false");
 			}
-			
-			$localStorage.cart.push({"item" : item, "numberOfItems" : numberOfItems});
+
+			if(retVals.includes("true"))
+				return true;
+			else
+				return false;
 		}
 
 	};

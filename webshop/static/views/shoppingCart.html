@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<div class="mainDiv">
+<div class="mainDiv" style="float: left; width: 60%; display: inline-block; margin-left: 5%; margin-right: 5%">
 	<h2 style="text-align: center">
 		<b>Shopping Cart</b>
 	</h2>
@@ -37,11 +37,24 @@
 		</div>
 		<br>
 	</div>
+</div>
 
-	<!---------------------- INVOICE TOTAL SECTION ---------------------->
-	<div class="totalDiv" ng-if="cartCtrl.shoppingCart[0] != null">
-		<b>Subtotal:</b> 200 $ <br> <b>Discount:</b> 20 % <br>
+<!---------------------- INVOICE TOTAL SECTION ---------------------->
+<div class="totalDiv" style="text-align: center">
+	<div>
+		<b>Subtotal:</b> {{cartCtrl.subtotal}} $ <br>
+		<b>Discount:</b> 0 % <br>
 		<hr style="border-top: 3px solid gray">
-		<b>Total:</b> 180 $ <br>
+		<b>Total:</b> {{cartCtrl.subtotal}} $
 	</div>
+	
+	<br><br>
+	
+	<a ng-href="/#!/checkoutCounter" style="text-decoration: none; color: black">
+		<button class="btn btn-default" ng-if="cartCtrl.shoppingCart[0] != null">
+			<b>Proceed to Pay</b> &nbsp;
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		</button>
+	</a>
+	<br>
 </div>
