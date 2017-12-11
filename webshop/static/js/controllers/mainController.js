@@ -5,10 +5,12 @@
 
 	function MainController($localStorage, MainService) {
 		var vm = this;
+		$("#success").hide();
+		
 		var cart = [];
 		if($localStorage.cart == null)
 			$localStorage.cart = [];
-		
+
 		MainService.getItems().then(function(items) {
 			vm.items = items;
 	 	});
@@ -22,10 +24,13 @@
 			if (numberOfItems == 0)
 				numberOfItems = 1;
 			
-			document.getElementById("addToCartButton" + item.id).disabled = true;
-			
 			if (!itemExists(item.id, numberOfItems))
 				$localStorage.cart.push({"item" : item, "numberOfItems" : numberOfItems});
+			
+			$("#success").show();
+			$("#success").fadeTo(2000, 500).slideUp(500, function() {
+				$("#success").slideUp(700);
+			});
 		}
 		
 		var itemExists = function(id, numberOfItems) {
