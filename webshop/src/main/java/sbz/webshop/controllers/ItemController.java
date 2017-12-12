@@ -90,6 +90,6 @@ public class ItemController {
 		
 		invoiceService.saveInvoice(invoice);
 		
-		return new ResponseEntity<Invoice>(HttpStatus.OK);
+		return new ResponseEntity<Invoice>(invoice, HttpStatus.OK);
 	}
 }

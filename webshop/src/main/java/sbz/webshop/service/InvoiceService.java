@@ -42,5 +42,9 @@ public class InvoiceService {
 	public Invoice saveInvoice(Invoice invoice){
 		return invoiceRepository.save(invoice);
 	}
+
+	public List<Invoice> findAllByBuyerId(int id){
+		return invoiceRepository.findAllByBuyerId(id);
+	}
 	
 }

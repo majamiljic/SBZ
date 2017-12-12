@@ -6,14 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import sbz.webshop.DTO.LoginUserDTO;
+import sbz.webshop.model.Invoice;
 import sbz.webshop.model.User;
 import sbz.webshop.model.UsersProfile;
+import sbz.webshop.service.InvoiceService;
 import sbz.webshop.service.UserService;
 
 @RestController
@@ -22,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	InvoiceService invoiceService;
 
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAllUsers() {
@@ -83,6 +89,12 @@ public class UserController {
 		
 		userService.save(user);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getInvoices/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Invoice>> getInvoices(@PathVariable int id) {
+		List<Invoice> invoices = invoiceService.findAllByBuyerId(id);
+		return new ResponseEntity<List<Invoice>>(invoices, HttpStatus.OK);
 	}
 
 }

@@ -14,10 +14,18 @@
 		vm.regDate = regDate;
 
 		vm.registerSeller = function(seller) {
-			UserService.registerSeller(seller).then(function(seller) {
-				window.location = "/";
+			UserService.registerSeller(seller).then(function() {
+				window.location = "/main";
 		 	});
 		}
+
+		var id = vm.user.id;
+		vm.getInvoices = function(id) {
+			UserService.getInvoices(id).then(function(invoices) {
+				vm.invoices = invoices;
+		 	});
+		}
+		vm.getInvoices(id);
 	};
 
 })(angular);

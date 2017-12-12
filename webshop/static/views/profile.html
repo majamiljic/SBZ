@@ -1,3 +1,5 @@
+<meta charset="UTF-8">
+
 <!------------------------ PROFILE INFORMATION SECTION ------------------------>
 <div class="infoDiv">
 	<h3 style="text-align: center">User info</h3>
@@ -43,42 +45,34 @@
 	<h2 style="text-align: center">Shopping history</h2>
 	<br>
 
-	<div class="row" align="center">
-		<div class="col-sm-4">
-			<div class="itemDiv">
-				<div class="descriptionDiv">
-					<p>
-						<b style="color: orange"> Shopping number 1 </b> <br> <b>Code:</b>
-						1CEF <br> <b>Category:</b> Snacks <br> <b>Price:</b>
-						1.99 EUR <br> <b>Discount:</b> 10%
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="itemDiv">
-				<div class="descriptionDiv">
-					<p>
-						<b style="color: orange"> Shopping number 2 </b> <br> <b>Code:</b>
-						1CEF <br> <b>Category:</b> Snacks <br> <b>Price:</b>
-						1.99 EUR <br> <b>Discount:</b> 10%
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="itemDiv">
-				<div class="descriptionDiv">
-					<p>
-						<b style="color: orange"> Shopping number 3 </b> <br> <b>Code:</b>
-						1CEF <br> <b>Category:</b> Snacks <br> <b>Price:</b>
-						1.99 EUR <br> <b>Discount:</b> 10% <br> <b
-							style="color: orange"> Shopping number 1 </b> <br> <b>Code:</b>
-						1CEF <br> <b>Category:</b> Snacks <br> <b>Price:</b>
-						1.99 EUR <br> <b>Discount:</b> 10%
-					</p>
-				</div>
+	<div class="row" align="center" ng-repeat="invoice in userCtrl.invoices">
+		<div class="itemDiv" style="margin-left: 20px; margin-right: 20px; padding: 15px">
+			<div class="descriptionDiv" style="width: 100%">
+				<p style="float: left; display: inline-block">
+					<b style="color:orange">Invoice</b>			<br>
+					<b>Number: </b> {{invoice.id}}				<br>
+					<b>Status: </b> {{invoice.invoiceStatus}} 	<br>
+					<b>Subtotal: </b> {{invoice.subtotal}}		<br>
+					<b>Total: </b> {{invoice.total}}
+				</p>
+				<table class="table" style="display: inline-block; float: right; font-size: 14px; width:70%">
+					<tr>
+						<th>Number</th>
+						<th>Name</th>
+						<th>Code</th>
+						<th>Category</th>
+						<th>Price</th>
+					</tr>
+					<tr ng-repeat="element in invoice.invoiceItems">
+						<td>{{element.invoiceItemNumber}}</td>
+						<td>{{element.item.name}}</td>
+						<td>{{element.item.code}}</td>
+						<td>{{element.item.category.name}}</td>
+						<td>{{element.item.price}} €</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
+	
 </div>

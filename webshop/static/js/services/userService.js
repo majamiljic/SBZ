@@ -27,7 +27,11 @@ function UserService(Restangular) {
 	};
 
 	retVal.registerSeller = function(user) {
-		return Restangular.one('user/registerSeller').put(user).then(function(results) {
+		return Restangular.one('user/registerSeller').put(user);
+	};
+
+	retVal.getInvoices = function(id) {
+		return Restangular.one('user/getInvoices', id).getList().then(function(results) {
 			return results;
 		});
 	};

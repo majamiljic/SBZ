@@ -25,6 +25,7 @@
 		vm.purchase = function() {
 			var cart = $localStorage.cart;
 			ShoppingCartService.purchase(cart).then(function() {
+				$localStorage.cart = [];
 		 	});
 		}
 	};
