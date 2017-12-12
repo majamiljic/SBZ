@@ -20,17 +20,17 @@
 					<b>Category:</b> {{item.category.name}}	<br>
 					<b>Price:</b> {{item.price}} €			<br>
 					<b>Max Discount:</b> {{item.category.maxDiscount}}%		<br>
-					<form>
-						<input type="number" class="form-control" min="1" max="999"
-						style="width: 25%; float: left; margin-left: 10%"
-						id="numberOfItems{{item.id}}">
-						<button type="submit" class="btn btn-default" style="float: right; margin-right: 10%"
-						ng-click="$parent.mainCtrl.addToCart(item)" id="addToCartButton{{item.id}}">
-							<b>Add to cart</b> &nbsp;
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
-					</form>
 				</p>
+				<form>
+					<input type="number" class="form-control" min="1" max="999"
+					style="width: 25%; float: left; margin-left: 10%" value="1"
+					id="numberOfItems{{item.id}}">
+					<button type="submit" class="btn btn-default" style="float: right; margin-right: 10%"
+					ng-click="$parent.mainCtrl.addToCart(item)" id="addToCartButton{{item.id}}">
+						<b>Add to cart</b> &nbsp;
+						<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

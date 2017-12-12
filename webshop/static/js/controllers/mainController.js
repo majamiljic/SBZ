@@ -21,8 +21,6 @@
 		
 		vm.addToCart = function(item) {
 			var numberOfItems = document.getElementById("numberOfItems" + item.id).value;
-			if (numberOfItems == 0)
-				numberOfItems = 1;
 			
 			if (!itemExists(item.id, numberOfItems))
 				$localStorage.cart.push({"item" : item, "numberOfItems" : numberOfItems});

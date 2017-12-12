@@ -57,10 +57,5 @@ public class UsersCategory {
 	public void setSpendingBoundary(List<SpendingBoundary> spendingBoundary) {
 		this.spendingBoundary = spendingBoundary;
 	}
-
-	@Override
-	public String toString() {
-		return "UsersCategory [id=" + id + ", name=" + name + ", spendingBoundary=" + spendingBoundary + "]";
-	}
 	
 }

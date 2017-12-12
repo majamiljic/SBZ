@@ -1,31 +1,44 @@
 <meta charset="UTF-8">
-<div class="signUpDiv">
-	<h2 style="text-align: center">
-		<b>Checkout Counter</b>
-	</h2>
-	
-	<br>
-	
-	<div style="font-size: 16px; width: 30%; text-align: center; float: left; display: inline-block; margin-right: 5%">
-		<b>Subtotal:</b> {{cartCtrl.subtotal}} $ <br>
-		<b>Discount:</b> 0 % <br>
-		<hr style="border-top: 3px solid gray">
-		<b>Total:</b> {{cartCtrl.subtotal}} $
+<div class="signUpDiv" style="height: auto">
+	<div class="row">
+		<h2 style="text-align: center">
+			<b>Checkout Counter</b>
+		</h2>
 	</div>
-	<div style="font-size: 16px; width: 50%; text-align: center; display: inline-block; margin-right: 5%">
-		<b>Pay with:</b> Cash $ <br>
-		<b>Total:</b> ...... <br>
-		<b>Total:</b> ...... <br>
-		<b>Total:</b> ...... <br>
-	</div>
-	
-	<br><br><br><br>
-	
-	<a ng-href="/#!/shoppingCart" style="text-decoration: none; color: black;">
-		<button class="btn btn-default" style="float: left">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> &nbsp;
-			<b>Back to Shopping Cart</b>
-		</button>
-	</a>
 	<br>
+	<div class="row">
+		<div style="font-size: 16px; width: 30%; text-align: center;
+		float: left; display: inline-block; margin-right: 5%">
+			<b>Subtotal:</b> {{cartCtrl.subtotal}} $ <br>
+			<b>Discount:</b> 0 % <br>
+			<hr style="border-top: 3px solid gray">
+			<b>Total:</b> {{cartCtrl.subtotal}} $
+		</div>
+		<div ng-controller="UserController as userCtrl"
+			style="font-size: 16px; width: 50%; text-align: center; display: inline-block;
+			margin-right: 5%; float: right">
+			<b style="font-size: 20px; color: orange">User Details:</b> <br>
+			<b>Name: </b> {{userCtrl.user.name}} <br>
+			<b>Surname: </b> {{userCtrl.user.surname}} <br>
+			<b>Shipping address: </b> {{userCtrl.user.usersProfile.address}} <br>
+		</div>
+	</div>
+	<br><br><br>
+	<div class="row">
+		<a ng-href="/#!/shoppingCart" style="text-decoration: none; color: black;">
+			<button class="btn btn-default" style="float: left; display: inline-block;">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				&nbsp;
+				<b>Back </b> &nbsp;
+			</button>
+		</a>
+		<a ng-href="/#!/profile" style="text-decoration: none; color: black;">
+			<button class="btn btn-success" ng-click="cartCtrl.purchase()"
+			style="float: right; display: inline-block;">
+				<b>Purchase</b>
+				&nbsp;
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			</button>
+		</a>
+	</div>
 </div>
