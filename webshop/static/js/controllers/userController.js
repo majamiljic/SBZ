@@ -15,7 +15,7 @@
 
 		vm.registerSeller = function(seller) {
 			UserService.registerSeller(seller).then(function() {
-				window.location = "/main";
+				window.location = "/#!/main";
 		 	});
 		}
 

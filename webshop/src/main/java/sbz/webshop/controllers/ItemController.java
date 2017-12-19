@@ -58,7 +58,7 @@ public class ItemController {
 		User user = userService.findOne(3);
 		invoice.setBuyer(user);
 		invoice.setDate(new Date());
-		invoice.setInvoiceStatus("Successfull");
+		invoice.setInvoiceStatus("Ordered");
 		
 		List<InvoiceItem> invoiceItems = new ArrayList<InvoiceItem>();
 		
@@ -75,8 +75,6 @@ public class ItemController {
 			invoiceItem.setTotalPrice(subtotalPrice);
 			
 			invoiceItems.add(invoiceItem);
-			invoiceService.save(invoiceItem);
-			
 			invoiceItemNumber++;
 		}
 		
@@ -84,12 +82,12 @@ public class ItemController {
 		for (InvoiceItem invoiceItem : invoiceItems)
 			invoiceTotal += invoiceItem.getTotalPrice();
 		
-		invoice.setInvoiceItems(invoiceItems);
 		invoice.setSubtotal(invoiceTotal);
 		invoice.setTotal(invoiceTotal);
+		invoice.setInvoiceItems(invoiceItems);
 		
 		invoiceService.saveInvoice(invoice);
-		
+
 		return new ResponseEntity<Invoice>(invoice, HttpStatus.OK);
 	}
 }

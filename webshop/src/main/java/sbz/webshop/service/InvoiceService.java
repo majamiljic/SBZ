@@ -46,5 +46,9 @@ public class InvoiceService {
 	public List<Invoice> findAllByBuyerId(int id){
 		return invoiceRepository.findAllByBuyerId(id);
 	}
+
+	public List<Invoice> findAllByInvoiceStatus(String status){
+		return invoiceRepository.findAllByInvoiceStatus(status);
+	}
 	
 }

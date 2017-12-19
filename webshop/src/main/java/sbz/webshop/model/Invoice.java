@@ -1,5 +1,6 @@
 package sbz.webshop.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Invoice {
 	private int pointsSpent;
 	private int pointsEarned;
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<InvoiceItem> invoiceItems;
+	private List<InvoiceItem> invoiceItems = new ArrayList<InvoiceItem>();
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<InvoiceDiscount> discounts;
 	

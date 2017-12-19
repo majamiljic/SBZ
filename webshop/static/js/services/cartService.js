@@ -5,7 +5,9 @@ function ShoppingCartService(Restangular) {
 	var retVal = {};
 
 	retVal.purchase = function(cart) {
-		return Restangular.all('items/purchase').post(cart);
+		return Restangular.all('items/purchase').post(cart).then(function(results) {
+			return results;
+		});
 	};
 
 	return retVal;

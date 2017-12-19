@@ -23,21 +23,18 @@
 		}
 		
 		if($localStorage.user != null){
+			var role = $localStorage.user.role;
 			vm.seller = function() {
-				if($localStorage.user != null){
-					if($localStorage.user.role == "Seller")
-						return true;
-					else
-						return false;
-				}
+				if(role == "Seller")
+					return true;
+				else
+					return false;
 			}
-			vm.manager = function() {
-				if($localStorage.user != null){
-					if($localStorage.user.role == "Manager")
-						return true;
-					else
-						return false;
-				}
+			vm.manager = function() { 
+				if(role == "Manager")
+					return true;
+				else
+					return false;
 			}
 		}
 		

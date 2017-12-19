@@ -9,4 +9,5 @@ import sbz.webshop.model.Invoice;
 
 public interface InvoiceRepository extends JpaRepository<Invoice, Integer>, JpaSpecificationExecutor<Invoice> {
 	public List<Invoice> findAllByBuyerId(int id);
+	public List<Invoice> findAllByInvoiceStatus(String status);
 }

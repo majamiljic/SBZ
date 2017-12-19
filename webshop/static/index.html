@@ -15,6 +15,9 @@
             <li ng-if="loginCtrl.manager()">
             	<a ng-href="/#!/registerSeller" href>Register seller</a>
             </li>
+            <li ng-if="loginCtrl.seller()">
+            	<a ng-href="/#!/invoices" href>Invoices</a>
+            </li>
             <li ng-if="!loginCtrl.loggedUser()">
             	<a ng-href="/#!/profile" href>My profile</a>
             </li>
@@ -30,9 +33,7 @@
         </ul>
 		
 		<div class="logoDiv">
-			<a ng-href="/#!/main">
-				<img style="text-align:center" src="img/shopit.png">
-			</a>
+			<img style="text-align:center" src="img/shopit.png">
 		</div>
 
 	  	<div ng-view></div>
@@ -53,10 +54,12 @@
 	  	<script src="js/controllers/cartController.js"></script>
 	  	<script src="js/controllers/userController.js"></script>
 	  	<script src="js/controllers/loginController.js"></script>
+	  	<script src="js/controllers/sellerController.js"></script>
 	  	<script src="js/services/mainService.js"></script>
 	  	<script src="js/services/itemService.js"></script>
 	  	<script src="js/services/cartService.js"></script>
 	  	<script src="js/services/userService.js"></script>
+	  	<script src="js/services/sellerService.js"></script>
         
     </body>
 </html>
