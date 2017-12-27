@@ -26,5 +26,15 @@ function SellerService(Restangular) {
 		});
 	};
 
+	retVal.getItemsToRefill = function() {
+		return Restangular.all('seller/getItemsToRefill').getList().then(function(results) {
+			return results;
+		});
+	};
+
+	retVal.refill = function(numberOfItems) {
+		return Restangular.one('seller/refill').customPOST(numberOfItems);
+	};
+
 	return retVal;
 }

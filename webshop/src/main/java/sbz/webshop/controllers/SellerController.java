@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import sbz.webshop.model.Invoice;
 import sbz.webshop.model.InvoiceItem;
+import sbz.webshop.model.Item;
 import sbz.webshop.service.InvoiceService;
 import sbz.webshop.service.ItemService;
 
@@ -39,6 +41,8 @@ public class SellerController {
 		if(approve(invoice)) {
 			for (InvoiceItem i : invoice.getInvoiceItems()) {
 				i.getItem().setStockStatus(i.getItem().getStockStatus() - i.getQuantity());
+				if(i.getItem().getStockStatus() < i.getItem().getMinStockStatus())
+					i.getItem().setRefill("Yes");
 				itemService.save(i.getItem());
 			}
 			invoice.setInvoiceStatus("Successful");
@@ -75,6 +79,24 @@ public class SellerController {
 		
 		List<Invoice> invoices = invoiceService.findAllByInvoiceStatus("Ordered");
 		return new ResponseEntity<List<Invoice>>(invoices, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getItemsToRefill", method = RequestMethod.GET)
+	public ResponseEntity<List<Item>> getItemsToRefill() {
+		List<Item> items = itemService.findAllByRefill("Yes");
+		return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/refill", method = RequestMethod.POST)
+	public ResponseEntity<List<Item>> refill(@RequestBody int numberOfItems) {
+		List<Item> items = itemService.findAllByRefill("Yes");
+		for (Item item : items) {
+			int stockStatus = item.getStockStatus();
+			item.setStockStatus(stockStatus + numberOfItems);
+			item.setRefill("No");
+			itemService.save(item);
+		}
+		return new ResponseEntity<List<Item>>(HttpStatus.OK);
 	}
 
 }

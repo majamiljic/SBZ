@@ -8,6 +8,7 @@
 		$("#declined").hide();
 		$("#approved").hide();
 		$("#cancelled").hide();
+		$("#refilled").hide();
 
 		SellerService.getInvoices().then(function(results) {
 			vm.invoices = results;
@@ -37,6 +38,21 @@
 				$("#cancelled").show();
 				$("#cancelled").fadeTo(2000, 500).slideUp(500, function() {
 					$("#cancelled").slideUp(700);
+				});
+			});
+		}
+
+		SellerService.getItemsToRefill().then(function(results) {
+			vm.items = results;
+	 	});
+		
+		vm.refill = function() {
+			var numberOfItems = document.getElementById("numberOfItems").value;
+			SellerService.refill(numberOfItems).then(function() {
+				vm.items = [];
+				$("#refilled").show();
+				$("#refilled").fadeTo(2000, 500).slideUp(500, function() {
+					$("#refilled").slideUp(700);
 				});
 			});
 		}

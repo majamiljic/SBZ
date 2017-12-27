@@ -43,6 +43,10 @@
 			templateUrl : 'views/invoices.html',
 			controller  : 'SellerController',
 			controllerAs: 'sellerCtrl'
+		}).when('/order', {
+			templateUrl : 'views/order.html',
+			controller  : 'SellerController',
+			controllerAs: 'sellerCtrl'
 		}).otherwise({
 			redirectTo : '/'
 		});

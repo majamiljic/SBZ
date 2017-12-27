@@ -25,5 +25,9 @@ public class ItemService {
 	public Item save(Item item){
 		return itemRepository.save(item);
 	}
+
+	public List<Item> findAllByRefill(String refill){
+		return itemRepository.findAllByRefill(refill);
+	}
 	
 }
