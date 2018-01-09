@@ -2,7 +2,8 @@
 	'use strict';
 	
 	angular.module('webShopApp',
-			['ngRoute', 'restangular', 'ngStorage', 'lodash', 'main', 'items', 'cart', 'user', 'login', 'seller'])
+			['ngRoute', 'restangular', 'ngStorage', 'lodash',
+			 'main', 'items', 'cart', 'user', 'login', 'seller', 'manager'])
 			.config(configure).run(runBlock);
 	
 	configure.$inject = ['$routeProvider', 'RestangularProvider'];
@@ -47,6 +48,10 @@
 			templateUrl : 'views/order.html',
 			controller  : 'SellerController',
 			controllerAs: 'sellerCtrl'
+		}).when('/preferences', {
+			templateUrl : 'views/preferences.html',
+			controller  : 'ManagerController',
+			controllerAs: 'managerCtrl'
 		}).otherwise({
 			redirectTo : '/'
 		});

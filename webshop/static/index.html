@@ -9,26 +9,29 @@
             <li ng-show="!loginCtrl.loggedUser()">
             	<a ng-href="/#!/main">Start Shopping</a>
             </li>
-            <li ng-if="!loginCtrl.loggedUser() && !loginCtrl.seller() && !loginCtrl.manager()">
+            <li ng-show="!loginCtrl.loggedUser() && !loginCtrl.seller() && !loginCtrl.manager()">
             	<a ng-href="/#!/shoppingCart">Shopping Cart</a>
             </li>
-            <li ng-if="loginCtrl.manager()">
+            <li ng-show="loginCtrl.manager()">
             	<a ng-href="/#!/registerSeller">Register seller</a>
             </li>
-            <li ng-if="loginCtrl.seller()">
+            <li ng-show="loginCtrl.manager()">
+            	<a ng-href="/#!/preferences">Preferences</a>
+            </li>
+            <li ng-show="loginCtrl.seller()">
             	<a ng-href="/#!/invoices">Invoices</a>
             </li>
-            <li ng-if="loginCtrl.seller()">
+            <li ng-show="loginCtrl.seller()">
             	<a ng-href="/#!/order">Order</a>
             </li>
-            <li ng-if="!loginCtrl.loggedUser()">
+            <li ng-show="!loginCtrl.loggedUser()">
             	<a ng-href="/#!/profile">My profile</a>
             </li>
             <li style="float: right; margin-right: 20px;" ng-show="loginCtrl.loggedUser()">
 				<a ng-href="/#!/login">Log in</a>
 			</li>
 			<li style="float: right; margin-right: 20px;" ng-show="!loginCtrl.loggedUser()">
-				<a ng-click="loginCtrl.logout()">Log Out</a>
+				<a ng-click="loginCtrl.logout()" href>Log Out</a>
 			</li>
             <li style="float: right;" ng-show="loginCtrl.loggedUser()">
 				<a ng-href="/#!/signup">Sign up</a>
@@ -58,11 +61,13 @@
 	  	<script src="js/controllers/userController.js"></script>
 	  	<script src="js/controllers/loginController.js"></script>
 	  	<script src="js/controllers/sellerController.js"></script>
+	  	<script src="js/controllers/managerController.js"></script>
 	  	<script src="js/services/mainService.js"></script>
 	  	<script src="js/services/itemService.js"></script>
 	  	<script src="js/services/cartService.js"></script>
 	  	<script src="js/services/userService.js"></script>
 	  	<script src="js/services/sellerService.js"></script>
+	  	<script src="js/services/managerService.js"></script>
         
     </body>
 </html>

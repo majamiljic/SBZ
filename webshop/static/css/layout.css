@@ -138,3 +138,11 @@ li a:hover {
     background-color: rgba(250,250,250,0.9);
 	border-radius: 15px;
 }
+
+/********************  USERS CATEGORY  ********************/
+.usersCategoryDiv {
+    margin: 0px 5% 50px 5%;
+    padding: 20px;
+    background-color: rgba(250,250,250,0.93);
+	border-radius: 15px;
+}

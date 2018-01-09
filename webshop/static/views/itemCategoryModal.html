@@ -1,0 +1,38 @@
+<div class="modal fade editCategory" tabindex="-1" role="dialog" aria-labelledby="updateLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Item Category</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<form>
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label>Name:</label>
+								<input type="text" class="form-control" ng-model="$parent.managerCtrl.selectedCategory.name">
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label>Max Discount:</label>
+								<input type="text" class="form-control" ng-model="$parent.managerCtrl.selectedCategory.maxDiscount">
+							</div>
+							<div class="col-md-3">
+								<label for="city-form-zipcode">Consumer Good:</label>
+								<input type="checkbox" class="form-control" ng-model="$parent.managerCtrl.selectedCategory.consGood">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal"
+				ng-click="$parent.managerCtrl.updateItemCategory($parent.managerCtrl.selectedCategory)">
+					Save
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
