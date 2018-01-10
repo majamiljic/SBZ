@@ -25,10 +25,22 @@ public class ManagerController {
 	@Autowired
 	ItemCategoryService itemCategoryService;
 
-	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/getCategories", method = RequestMethod.GET)
+	public ResponseEntity<List<ItemCategory>> getCategories() {
+		List<ItemCategory> categories = itemCategoryService.findAll();
+		return new ResponseEntity<List<ItemCategory>>(categories, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getOffers", method = RequestMethod.GET)
 	public ResponseEntity<List<SpecialOffer>> getSpecialOffers() {
 		List<SpecialOffer> offers = specialOfferService.findAll();
 		return new ResponseEntity<List<SpecialOffer>>(offers, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/updateItemCategory", method = RequestMethod.POST)
+	public ResponseEntity<ItemCategory> updateItemCategory(@RequestBody ItemCategory itemCategory) {
+		itemCategoryService.save(itemCategory);
+		return new ResponseEntity<ItemCategory>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/updateOffer", method = RequestMethod.POST)
@@ -37,9 +49,27 @@ public class ManagerController {
 		return new ResponseEntity<SpecialOffer>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/updateItemCategory", method = RequestMethod.POST)
-	public ResponseEntity<ItemCategory> updateItemCategory(@RequestBody ItemCategory itemCategory) {
-		itemCategoryService.save(itemCategory);
-		return new ResponseEntity<ItemCategory>(HttpStatus.OK);
+	@RequestMapping(value = "/addItemCategory", method = RequestMethod.POST)
+	public ResponseEntity<List<ItemCategory>> addItemCategory(@RequestBody ItemCategory newItemCategory) {
+		List<ItemCategory> categories = itemCategoryService.findAll();
+		for (ItemCategory itemCategory : categories) {
+			if(itemCategory.getName().equals(newItemCategory.getName()))
+				return new ResponseEntity<List<ItemCategory>>(HttpStatus.BAD_REQUEST);
+		}
+		
+		itemCategoryService.save(newItemCategory);
+		return new ResponseEntity<List<ItemCategory>>(itemCategoryService.findAll(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/addOffer", method = RequestMethod.POST)
+	public ResponseEntity<List<SpecialOffer>> addOffer(@RequestBody SpecialOffer newOffer) {
+		List<SpecialOffer> specialOffers = specialOfferService.findAll();
+		for (SpecialOffer specialOffer : specialOffers) {
+			if(specialOffer.getName().equals(newOffer.getName()))
+				return new ResponseEntity<List<SpecialOffer>>(HttpStatus.BAD_REQUEST);
+		}
+		
+		specialOfferService.save(newOffer);
+		return new ResponseEntity<List<SpecialOffer>>(specialOfferService.findAll(), HttpStatus.OK);
 	}
 }

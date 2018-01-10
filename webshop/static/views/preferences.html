@@ -6,6 +6,13 @@
 			<h3 style="text-align: center">
 				<b>Items Categories</b>
 			</h3>
+			
+			<div class="alert alert-danger" id="exists"
+				 style="text-align: center; margin-left: 15px">
+			  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Item Category with that name already exists!</strong>
+			</div>
+			
 			<br>
 			<form>
 				<table class="table">
@@ -14,7 +21,12 @@
 						<th style="text-align: center">Category Name</th>
 						<th style="text-align: center">Max Discount</th>
 						<th style="text-align: center">Consumers good</th>
-						<th style="text-align: center"> </th>
+						<th style="text-align: center">
+							<button type="button" class="btn btn-primary"
+							data-toggle="modal" data-target=".newCategory">
+								New
+							</button>
+						</th>
 					</tr>
 					<tr style="text-align: center" ng-repeat="cat in managerCtrl.categories">
 						<td>{{cat.id}}</td>
@@ -70,6 +82,13 @@
 			<h3 style="text-align: center">
 				<b>Special Offers</b>
 			</h3>
+			
+			<div class="alert alert-danger" id="offerExists"
+				 style="text-align: center; margin-left: 15px">
+			  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Special Offer with that name already exists!</strong>
+			</div>
+			
 			<br>
 			<form>
 				<table class="table">
@@ -79,7 +98,12 @@
 						<th style="text-align: center">Date From</th>
 						<th style="text-align: center">Date To</th>
 						<th style="text-align: center">Discount</th>
-						<th style="text-align: center"> </th>
+						<th style="text-align: center">
+							<button type="button" class="btn btn-primary"
+							data-toggle="modal" data-target=".newOffer">
+								New
+							</button>
+						</th>
 					</tr>
 					<tr style="text-align: center" ng-repeat="offer in managerCtrl.offers">
 						<td>{{offer.id}}</td>
@@ -108,3 +132,5 @@
 
 <div ng-include="'views/offerModal.html'"></div>
 <div ng-include="'views/itemCategoryModal.html'"></div>
+<div ng-include="'views/newItemCategoryModal.html'"></div>
+<div ng-include="'views/newOfferModal.html'"></div>

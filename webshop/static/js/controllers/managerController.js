@@ -1,14 +1,16 @@
 (function(angular) {
 	'use strict';
 	angular.module('manager', []).controller('ManagerController', ManagerController);
-	ManagerController.$inject = ['$localStorage', 'SellerService', 'MainService', 'ManagerService'];
+	ManagerController.$inject = ['$localStorage', 'SellerService', 'ManagerService'];
 
-	function ManagerController($localStorage, SellerService, MainService, ManagerService) {
+	function ManagerController($localStorage, SellerService, ManagerService) {
 		var vm = this;
 		$("#declined").hide();
 		$("#approved").hide();
 		$("#cancelled").hide();
 		$("#refilled").hide();
+		$("#exists").hide();
+		$("#offerExists").hide();
 
 		SellerService.getInvoices().then(function(results) {
 			vm.invoices = results;
@@ -57,7 +59,7 @@
 			});
 		}
 
-		MainService.getCategories().then(function(results) {
+		ManagerService.getCategories().then(function(results) {
 			vm.categories = results;
 	 	});
 
@@ -77,12 +79,43 @@
 			ManagerService.updateOffer(selected);
 		};
 		
+		vm.updateItemCategory = function(selectedCategory) {
+			ManagerService.updateItemCategory(selectedCategory);
+		};
+		
 		vm.setSelectedCategory = function(selectedCategory) {
 			vm.selectedCategory = selectedCategory;
 		};
 		
-		vm.updateItemCategory = function(selectedCategory) {
-			ManagerService.updateItemCategory(selectedCategory);
+		vm.addItemCategory = function(newCategory) {
+			ManagerService.addItemCategory(newCategory).then(function(results) {
+				if(results != null)
+					vm.categories = results;
+				else {
+					$("#exists").show();
+					$("#exists").fadeTo(2000, 500).slideUp(500, function() {
+						$("#exists").slideUp(700);
+					});
+				}
+		 	});
+		};
+		
+		vm.addOffer = function(newOffer) {
+			ManagerService.addOffer(newOffer).then(function(results) {
+				if(results != null) {
+					for (var i = 0; i < results.length; i++) {
+						results[i].dateFrom = new Date(results[i].dateFrom);
+						results[i].dateTo = new Date(results[i].dateTo);
+					}
+					vm.offers = results;
+				}
+				else {
+					$("#offerExists").show();
+					$("#offerExists").fadeTo(2000, 500).slideUp(500, function() {
+						$("#offerExists").slideUp(700);
+					});
+				}
+		 	});
 		};
 
 	};
