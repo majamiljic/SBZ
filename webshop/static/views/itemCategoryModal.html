@@ -8,9 +8,16 @@
 				<div class="container">
 					<form>
 						<div class="form-group row">
-							<div class="col-md-6">
+							<div class="col-md-3">
 								<label>Name:</label>
 								<input type="text" class="form-control" ng-model="$parent.managerCtrl.selectedCategory.name">
+							</div>
+							<div class="col-md-3">
+								<label>Parent Category:</label>
+								<select class="form-control"
+								ng-model="$parent.managerCtrl.selectedCategory.parentCategory"
+								ng-options="parentCategory.name for parentCategory in $parent.managerCtrl.parentCategories">
+								</select>
 							</div>
 						</div>
 						<div class="row form-group">

@@ -10,6 +10,12 @@ function ManagerService(Restangular) {
 		});
 	};
 
+	retVal.getParentCategories = function() {
+		return Restangular.all('manager/getParentCategories').getList().then(function(results) {
+			return results;
+		});
+	};
+
 	retVal.getSpecialOffers = function() {
 		return Restangular.all('manager/getOffers').getList().then(function(results) {
 			return results;
@@ -42,6 +48,30 @@ function ManagerService(Restangular) {
 			function() {
 				return null;
 			});
+	};
+
+	retVal.getUserCategories = function() {
+		return Restangular.all('manager/getUserCategories').getList().then(function(results) {
+			return results;
+		});
+	};
+
+	retVal.getSpendingBoundariesByUserCategory = function(id) {
+		return Restangular.one('manager/getSpendingBoundariesByUserCategory', id).getList().then(function(results) {
+			return results;
+		});
+	};
+
+	retVal.addSpendingBoundary = function(spendingBoundary) {
+		return Restangular.one('manager/addSpendingBoundary').customPOST(spendingBoundary).then(function(results) {
+			return results;
+		});
+	};
+
+	retVal.updateSpendingBoundary = function(spendingBoundary) {
+		return Restangular.one('manager/updateSpendingBoundary').customPOST(spendingBoundary).then(function(results) {
+			return results;
+		});
 	};
 
 	return retVal;

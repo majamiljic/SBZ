@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sbz.webshop.model.SpendingBoundary;
 import sbz.webshop.model.User;
 import sbz.webshop.model.UsersCategory;
 import sbz.webshop.model.UsersProfile;
+import sbz.webshop.repository.SpendingBoundaryRepository;
 import sbz.webshop.repository.UserRepository;
 import sbz.webshop.repository.UsersCategoryRepository;
 import sbz.webshop.repository.UsersProfileRepository;
@@ -23,6 +25,9 @@ public class UserService {
 	
 	@Autowired
 	UsersProfileRepository usersProfileRepository;
+	
+	@Autowired
+	SpendingBoundaryRepository spendingBoundaryRepository;
 
 	public List<User> findAll(){
 		return userRepository.findAll();
@@ -44,8 +49,24 @@ public class UserService {
 		return usersCategoryRepository.findOneByName(category);
 	}
 	
+	public UsersCategory findOneById(int id) {
+		return usersCategoryRepository.findOneById(id);
+	}
+	
 	public UsersProfile save(UsersProfile profile) {
 		return usersProfileRepository.save(profile);
+	}
+
+	public List<UsersCategory> findAllUserCategories(){
+		return usersCategoryRepository.findAll();
+	}
+
+	public List<SpendingBoundary> findAllSpendingBoundariesByUserCategory(UsersCategory uc){
+		return spendingBoundaryRepository.findAllByUserCategory(uc);
+	}
+	
+	public SpendingBoundary saveSpendingBoundary(SpendingBoundary sb) {
+		return spendingBoundaryRepository.save(sb);
 	}
 
 }

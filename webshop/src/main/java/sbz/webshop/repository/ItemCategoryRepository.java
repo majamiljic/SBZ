@@ -9,5 +9,6 @@ import sbz.webshop.model.ItemCategory;
 
 public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Integer>, JpaSpecificationExecutor<ItemCategory> {
 	List<ItemCategory> findByParentCategoryNotNull();
+	List<ItemCategory> findByParentCategoryIsNull();
 	
 }

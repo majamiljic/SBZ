@@ -41,7 +41,7 @@ public class ItemController {
 
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	public ResponseEntity<List<Item>> getItems() {
-		List<Item> items = itemService.findAll();
+		List<Item> items = itemService.findAllByRefill("No");
 		return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
 	}
 

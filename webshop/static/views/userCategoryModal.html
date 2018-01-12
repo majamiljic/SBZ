@@ -1,0 +1,43 @@
+<div class="modal fade editUserCategory" tabindex="-1" role="dialog" aria-labelledby="updateLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">User Category</h4>
+			</div>
+			<div class="modal-body">
+					<form>
+						<table class="table">
+							<tr>
+								<th style="text-align: center">Id</th>
+								<th style="text-align: center">Spend From</th>
+								<th style="text-align: center">Spend To</th>
+								<th style="text-align: center">Bonus Points (%)</th>
+								<th> </th>
+							</tr>
+							<tr style="text-align: center" ng-repeat="sb in managerCtrl.spendingBoundaries">
+								<td>{{sb.id}}</td>
+								<td>
+									<input type="number" class="form-control" ng-model="sb.spendFrom">
+								</td>
+								<td>
+									<input type="number" class="form-control" ng-model="sb.spendTo">
+								</td>
+								<td>
+									<input type="number" class="form-control" ng-model="sb.bonusPoints">
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary" data-dismiss="modal"
+									ng-click="$parent.managerCtrl.updateSpendingBoundary(sb)">
+										Save
+									</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

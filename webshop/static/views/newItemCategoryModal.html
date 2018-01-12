@@ -8,15 +8,24 @@
 				<div class="container">
 					<form>
 						<div class="row form-group">
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<label>Name:</label>
 								<input type="text" class="form-control" ng-model="newCategory.name">
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
+								<label>Parent Category:</label>
+								<select class="form-control"
+								ng-model="newCategory.parentCategory"
+								ng-options="parentCategory.name for parentCategory in $parent.managerCtrl.parentCategories">
+								</select>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3">
 								<label>Max Discount:</label>
 								<input type="text" class="form-control" ng-model="newCategory.maxDiscount">
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<label for="city-form-zipcode">Consumer Good:</label>
 								<input type="checkbox" class="form-control" ng-model="newCategory.consGood">
 							</div>

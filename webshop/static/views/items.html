@@ -7,16 +7,12 @@
 <div class="row" align="center">
 	<div class="col-sm-4" ng-repeat="item in $parent.mainCtrl.items">
 		<div class="itemDiv">
-			<a href="#">
-				<img src="img/2.jpg" style="border-radius: 15px;">
-			</a>
+			<img src="img/2.jpg" style="border-radius: 15px;">
 			<div class="descriptionDiv">
 				<p>
-					<a href="#" style="text-decoration : none">
-						<b style="color:orange"> {{item.name}} </b>
-					</a>
+					<b style="color:orange"> {{item.name}} </b>
 					<br>
-					<!-- <b>Code:</b> {{item.code}}				<br> -->
+					<b>Code:</b> {{item.code}}				<br>
 					<b>Category:</b> {{item.category.name}}	<br>
 					<b>Price:</b> {{item.price}} €			<br>
 					<b>Max Discount:</b> {{item.category.maxDiscount}}%	<br>

@@ -1,81 +1,5 @@
 <meta charset="UTF-8">
 
-<div class="row">	
-	<div class="col-sm-9">
-		<div class="usersCategoryDiv">
-			<h3 style="text-align: center">
-				<b>Items Categories</b>
-			</h3>
-			
-			<div class="alert alert-danger" id="exists"
-				 style="text-align: center; margin-left: 15px">
-			  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong>Item Category with that name already exists!</strong>
-			</div>
-			
-			<br>
-			<form>
-				<table class="table">
-					<tr>
-						<th style="text-align: center">Id</th>
-						<th style="text-align: center">Category Name</th>
-						<th style="text-align: center">Max Discount</th>
-						<th style="text-align: center">Consumers good</th>
-						<th style="text-align: center">
-							<button type="button" class="btn btn-primary"
-							data-toggle="modal" data-target=".newCategory">
-								New
-							</button>
-						</th>
-					</tr>
-					<tr style="text-align: center" ng-repeat="cat in managerCtrl.categories">
-						<td>{{cat.id}}</td>
-						<td>{{cat.name}}</td>
-						<td>{{cat.maxDiscount}}%</td>
-						<td>
-							<input type="checkbox" class="form-control" ng-model="cat.consGood" disabled>
-						</td>
-						<td>
-							<button type="button" class="btn btn-default" data-toggle="modal"
-							data-target=".editCategory" ng-click="managerCtrl.setSelectedCategory(cat)">
-								Edit
-							</button>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
-	
-	<div class="col-sm-3">
-		<div class="usersCategoryDiv">
-			<h5 style="text-align: center">
-				<b>Users Categories</b>
-			</h5>
-			<form>
-				<table class="table">
-					<tr style="text-align: center; font-size: 12px">
-						<td><b>Regular</b></td>
-						<td><input type="number" style="width: 100%"></td>
-						<td><input type="number" style="width: 100%"></td>
-					</tr>
-					<tr style="text-align: center; font-size: 12px">
-						<td><b>Silver</b></td>
-						<td><input type="number" style="width: 100%"></td>
-						<td><input type="number" style="width: 100%"></td>
-					</tr>
-					<tr style="text-align: center; font-size: 12px">
-						<td><b>Golden</b></td>
-						<td><input type="number" style="width: 100%"></td>
-						<td><input type="number" style="width: 100%"></td>
-					</tr>
-				</table>
-				<input type="submit" class="btn btn-success" value="Update" style="margin-left: 35%; width: 35%">
-			</form>
-		</div>
-	</div>
-</div>
-
 <div class="row">
 	<div class="col-sm-9">
 		<div class="usersCategoryDiv">
@@ -128,9 +52,101 @@
 			</form>
 		</div>
 	</div>
+	
+	<div class="col-sm-3">
+		<div class="usersCategoryDiv">
+			<h4 style="text-align: center">
+				<b>Users Categories</b>
+			</h4>
+			
+			<div class="alert alert-success" id="updatedBoundary"
+				 style="text-align: center; margin-left: 15px">
+			  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Successfully updated!
+			</div>
+			<div class="alert alert-success" id="addedBoundary"
+				 style="text-align: center; margin-left: 15px">
+			  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Successfully added!
+			</div>
+			
+			<table class="table">
+				<tr style="text-align: center; font-size: 14px" ng-repeat="cat in managerCtrl.userCategories">
+					<td><b>{{cat.name}}</b></td>
+					<td>
+						<button type="button" class="btn btn-primary"
+						data-toggle="modal" data-target=".newSpendingBoundary"
+						ng-click="managerCtrl.setSelectedCategory(cat)">
+							New
+						</button>
+					</td>
+					<td>
+						<button type="button" class="btn btn-default"
+						data-toggle="modal" data-target=".editUserCategory"
+						ng-click="managerCtrl.getSpendingBoundariesByUserCategory(cat.id)">
+							Edit
+						</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+</div>
+
+<div class="row">	
+	<div class="col-sm-9">
+		<div class="usersCategoryDiv">
+			<h3 style="text-align: center">
+				<b>Items Categories</b>
+			</h3>
+			
+			<div class="alert alert-danger" id="exists"
+				 style="text-align: center; margin-left: 15px">
+			  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Item Category with that name already exists!</strong>
+			</div>
+			
+			<br>
+			<form>
+				<table class="table">
+					<tr>
+						<th style="text-align: center">Id</th>
+						<th style="text-align: center">Category Name</th>
+						<th style="text-align: center">Parent Category</th>
+						<th style="text-align: center">Max Discount</th>
+						<th style="text-align: center">Consumers good</th>
+						<th style="text-align: center">
+							<button type="button" class="btn btn-primary"
+							data-toggle="modal" data-target=".newCategory">
+								New
+							</button>
+						</th>
+					</tr>
+					<tr style="text-align: center" ng-repeat="cat in managerCtrl.categories">
+						<td>{{cat.id}}</td>
+						<td>{{cat.name}}</td>
+						<td>{{cat.parentCategory.name}}</td>
+						<td>{{cat.maxDiscount}}%</td>
+						<td>
+							<input type="checkbox" class="form-control" ng-model="cat.consGood" disabled>
+						</td>
+						<td>
+							<button type="button" class="btn btn-default" data-toggle="modal"
+							data-target=".editCategory" ng-click="managerCtrl.setSelectedCategory(cat)">
+								Edit
+							</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
 </div>
 
 <div ng-include="'views/offerModal.html'"></div>
 <div ng-include="'views/itemCategoryModal.html'"></div>
 <div ng-include="'views/newItemCategoryModal.html'"></div>
 <div ng-include="'views/newOfferModal.html'"></div>
+<div ng-include="'views/userCategoryModal.html'"></div>
+<div ng-include="'views/newSpendingBoundaryModal.html'"></div>

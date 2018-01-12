@@ -11,6 +11,8 @@
 		$("#refilled").hide();
 		$("#exists").hide();
 		$("#offerExists").hide();
+		$("#addedBoundary").hide();
+		$("#updatedBoundary").hide();
 
 		SellerService.getInvoices().then(function(results) {
 			vm.invoices = results;
@@ -61,6 +63,10 @@
 
 		ManagerService.getCategories().then(function(results) {
 			vm.categories = results;
+	 	});
+
+		ManagerService.getParentCategories().then(function(results) {
+			vm.parentCategories = results;
 	 	});
 
 		ManagerService.getSpecialOffers().then(function(results) {
@@ -115,6 +121,35 @@
 						$("#offerExists").slideUp(700);
 					});
 				}
+		 	});
+		};
+
+		ManagerService.getUserCategories().then(function(results) {
+			vm.userCategories = results;
+	 	});
+
+		vm.getSpendingBoundariesByUserCategory = function(id) {
+			ManagerService.getSpendingBoundariesByUserCategory(id).then(function(results) {
+				vm.spendingBoundaries = results;
+		 	});
+		};
+		
+		vm.addSpendingBoundary = function(spendingBoundary) {
+			spendingBoundary.userCategory = vm.selectedCategory;
+			ManagerService.addSpendingBoundary(spendingBoundary).then(function(results) {
+				$("#addedBoundary").show();
+				$("#addedBoundary").fadeTo(2000, 500).slideUp(500, function() {
+					$("#addedBoundary").slideUp(700);
+				});
+		 	});
+		};
+		
+		vm.updateSpendingBoundary = function(spendingBoundary) {
+			ManagerService.updateSpendingBoundary(spendingBoundary).then(function(results) {
+				$("#updatedBoundary").show();
+				$("#updatedBoundary").fadeTo(2000, 500).slideUp(500, function() {
+					$("#updatedBoundary").slideUp(700);
+				});
 		 	});
 		};
 

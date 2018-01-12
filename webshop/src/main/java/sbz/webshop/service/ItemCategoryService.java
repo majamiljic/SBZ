@@ -29,5 +29,9 @@ public class ItemCategoryService {
 	public List<ItemCategory> findByParentCategoryNotNull(){
 		return categoryRepository.findByParentCategoryNotNull();
 	}
+
+	public List<ItemCategory> findAllParentCategories(){
+		return categoryRepository.findByParentCategoryIsNull();
+	}
 	
 }

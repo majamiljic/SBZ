@@ -7,4 +7,5 @@ import sbz.webshop.model.UsersCategory;
 
 public interface UsersCategoryRepository extends JpaRepository<UsersCategory, String>, JpaSpecificationExecutor<UsersCategory> {
 	public UsersCategory findOneByName(String name);
+	public UsersCategory findOneById(int id);
 }
