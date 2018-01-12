@@ -28,9 +28,15 @@ public class SellerController {
 	@Autowired
 	ItemService itemService;
 
-	@RequestMapping(value = "/getInvoices", method = RequestMethod.GET)
-	public ResponseEntity<List<Invoice>> getInvoices() {
-		List<Invoice> invoices = invoiceService.findAllByInvoiceStatus("Ordered");
+	@RequestMapping(value = "/getAllInvoices", method = RequestMethod.GET)
+	public ResponseEntity<List<Invoice>> getAllInvoices() {
+		List<Invoice> invoices = invoiceService.findAllInvoices();
+		return new ResponseEntity<List<Invoice>>(invoices, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getInvoicesByStatus/{status}", method = RequestMethod.GET)
+	public ResponseEntity<List<Invoice>> getInvoicesByStatus(@PathVariable String status) {
+		List<Invoice> invoices = invoiceService.findAllByInvoiceStatus(status);
 		return new ResponseEntity<List<Invoice>>(invoices, HttpStatus.OK);
 	}
 

@@ -10,8 +10,21 @@
 		$("#cancelled").hide();
 		$("#refilled").hide();
 
-		SellerService.getInvoices().then(function(results) {
-			vm.invoices = results;
+		vm.getAllInvoices = function() {
+			SellerService.getAllInvoices().then(function(results) {
+				vm.invoices = results;
+		 	});
+		};
+		vm.getAllInvoices();
+		
+		vm.getInvoicesByStatus = function(status) {
+			SellerService.getInvoicesByStatus(status).then(function(results) {
+				vm.invoices = results;
+		 	});
+		};
+
+		SellerService.getInvoicesByStatus("Ordered").then(function(results) {
+			vm.orderedInvoices = results;
 	 	});
 		
 		vm.approve = function(id) {

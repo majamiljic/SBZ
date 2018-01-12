@@ -4,8 +4,14 @@ SellerService.$inject = ['Restangular'];
 function SellerService(Restangular) {
 	var retVal = {};
 
-	retVal.getInvoices = function() {
-		return Restangular.all('seller/getInvoices').getList().then(function(results) {
+	retVal.getAllInvoices = function() {
+		return Restangular.all('seller/getAllInvoices').getList().then(function(results) {
+			return results;
+		});
+	};
+
+	retVal.getInvoicesByStatus = function(status) {
+		return Restangular.one('seller/getInvoicesByStatus', status).getList().then(function(results) {
 			return results;
 		});
 	};

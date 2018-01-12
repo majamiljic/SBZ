@@ -44,6 +44,10 @@
 			templateUrl : 'views/invoices.html',
 			controller  : 'SellerController',
 			controllerAs: 'sellerCtrl'
+		}).when('/history', {
+			templateUrl : 'views/history.html',
+			controller  : 'SellerController',
+			controllerAs: 'sellerCtrl'
 		}).when('/order', {
 			templateUrl : 'views/order.html',
 			controller  : 'SellerController',

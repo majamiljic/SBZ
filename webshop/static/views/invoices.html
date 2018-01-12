@@ -23,11 +23,11 @@
 	</h2>
 	<br>
 	
-	<h3 ng-if="sellerCtrl.invoices[0] == null" style="text-align: center">
+	<h3 ng-if="sellerCtrl.orderedInvoices[0] == null" style="text-align: center">
 		Currently, there are no invoice requests.
 	</h3>
 
-	<div class="row" align="center" ng-repeat="invoice in sellerCtrl.invoices">
+	<div class="row" align="center" ng-repeat="invoice in sellerCtrl.orderedInvoices">
 		<div class="itemDiv" style="margin-left: 20px; margin-right: 20px; padding: 15px">
 			<div class="descriptionDiv" style="width: 100%">
 				<p class="invoiceInfoDiv">
