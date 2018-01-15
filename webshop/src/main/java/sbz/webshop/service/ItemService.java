@@ -42,4 +42,8 @@ public class ItemService {
 		return itemRepository.findAllByCategoryId(id);
 	}
 	
+	public List<Item> findAllByPrice(double priceFrom, double priceTo){
+		return itemRepository.findAllByPriceBetween(priceFrom, priceTo);
+	}
+	
 }

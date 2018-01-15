@@ -9,6 +9,8 @@
 		$("#noItem").hide();
 		$("#noItems").hide();
 		$("#noItemsInCategory").hide();
+		$("#priceInput").hide();
+		$("#noItemsByPrice").hide();
 		
 		var cart = [];
 		if($localStorage.cart == null)
@@ -101,6 +103,33 @@
 					$("#noItemsInCategory").show();
 			});
 		}
+		
+		vm.getItemsByPrice = function(priceFrom, priceTo) {
+			var prices = {
+				"priceFrom" : priceFrom,
+				"priceTo" : priceTo
+			};
+			if((priceFrom && priceTo) != null) {
+				if(priceFrom > priceTo){
+					$("#priceInput").show();
+					$("#priceInput").fadeTo(2000, 500).slideUp(500, function() {
+						$("#priceInput").slideUp(700);
+					});
+				}
+				else {
+					MainService.getItemsByPrice(prices).then(function(items){
+						if(items != null)
+							vm.items = items;
+						else{
+							$("#noItemsByPrice").show();
+							$("#noItemsByPrice").fadeTo(2000, 500).slideUp(500, function() {
+								$("#noItemsByPrice").slideUp(700);
+							});
+						}
+					});
+				}
+			}			
+		};
 		
 	};
 

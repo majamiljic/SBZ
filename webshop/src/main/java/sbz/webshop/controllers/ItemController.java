@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import sbz.webshop.DTO.CartItemDTO;
+import sbz.webshop.DTO.PricesDTO;
 import sbz.webshop.model.Invoice;
 import sbz.webshop.model.InvoiceItem;
 import sbz.webshop.model.Item;
@@ -73,6 +74,15 @@ public class ItemController {
 	@RequestMapping(value = "/getItemsByCategory/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<Item>> getItemsByCategory(@PathVariable int id) {
 		List<Item> items = itemService.findAllByCategoryId(id);
+		if(!items.isEmpty())
+			return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+		else
+			return new ResponseEntity<List<Item>>(HttpStatus.BAD_REQUEST);
+	}
+
+	@RequestMapping(value = "/getItemsByPrice", method = RequestMethod.POST)
+	public ResponseEntity<List<Item>> getItemsByPrice(@RequestBody PricesDTO prices) {
+		List<Item> items = itemService.findAllByPrice(prices.getPriceFrom(), prices.getPriceTo());
 		if(!items.isEmpty())
 			return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
 		else

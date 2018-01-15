@@ -12,4 +12,5 @@ public interface ItemRepository extends JpaRepository<Item, Integer>, JpaSpecifi
 	public List<Item> findAllByNameContains(String name);
 	public List<Item> findAllByCode(int code);
 	public List<Item> findAllByCategoryId(int id);
+	public List<Item> findAllByPriceBetween(double priceFrom, double priceTo);
 }

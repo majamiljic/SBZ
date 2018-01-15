@@ -46,5 +46,15 @@ function MainService(Restangular) {
 			});
 	};
 
+	retVal.getItemsByPrice = function(prices) {
+		return Restangular.one('items/getItemsByPrice').customPOST(prices).then(
+			function(results) {
+				return results;
+			},
+			function() {
+				return null;
+			});
+	};
+
 	return retVal;
 }
