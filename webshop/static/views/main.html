@@ -8,9 +8,9 @@
 		<!--Search field-->
 		<div class="col-sm-4">
 			<div class="input-group" style="float: left">
-				<input type="text" class="form-control" placeholder="Search...">
+				<input type="text" class="form-control" placeholder="Search..." ng-model="search">
 				<span class="input-group-btn">
-					<button type="button" class="btn btn-default">
+					<button type="button" class="btn btn-default" ng-click="mainCtrl.search(search)">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
@@ -31,12 +31,17 @@
 				</div>
 				
 				<div id="collapse1" class="panel-collapse collapse">
-					<div class="panel-body" align="left">
+					<div class="panel-body" align="center">
 						<form>
+							<button type="button" class="btn btn-default" style="width: 100px"
+							ng-click="mainCtrl.getAll()">
+								<div style="font-size: 11px">All</div>
+							</button>
 							<div class="checkbox" ng-repeat="category in mainCtrl.categories">
-								<label>
-									<input type="checkbox" value=""> {{category.name}}
-								</label>
+								<button type="button" class="btn btn-default" style="width: 100px"
+								ng-click="mainCtrl.getItemsByCategory(category.id)">
+									<div style="font-size: 11px">{{category.name}}</div>
+								</button>
 							</div>
 						</form>
 					</div>

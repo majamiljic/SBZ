@@ -29,5 +29,17 @@ public class ItemService {
 	public List<Item> findAllByRefill(String refill){
 		return itemRepository.findAllByRefill(refill);
 	}
+
+	public List<Item> findAllByName(String name){
+		return itemRepository.findAllByNameContains(name);
+	}
+	
+	public List<Item> findAllByCode(int code){
+		return itemRepository.findAllByCode(code);
+	}
+	
+	public List<Item> findAllByCategoryId(int id){
+		return itemRepository.findAllByCategoryId(id);
+	}
 	
 }

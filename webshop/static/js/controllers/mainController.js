@@ -6,6 +6,9 @@
 	function MainController($localStorage, MainService) {
 		var vm = this;
 		$("#success").hide();
+		$("#noItem").hide();
+		$("#noItems").hide();
+		$("#noItemsInCategory").hide();
 		
 		var cart = [];
 		if($localStorage.cart == null)
@@ -49,7 +52,56 @@
 			else
 				return false;
 		}
-
+		
+		vm.search = function(search) {
+			if(search == null || search == "") {
+				MainService.getItems().then(function(items) {
+					vm.items = items;
+			 	});
+			}
+			else {
+				if(Number.isInteger(Number(search))) {
+					MainService.getItemByCode(Number(search)).then(function(items) {
+						if(items != null)
+							vm.items = items;
+						else{
+							$("#noItem").show();
+							$("#noItem").fadeTo(2000, 500).slideUp(500, function() {
+								$("#noItem").slideUp(700);
+							});
+						}
+				 	});
+				}
+				else {
+					MainService.getItemsByName(search).then(function(items) {
+						if(items != null)
+							vm.items = items;
+						else{
+							$("#noItems").show();
+							$("#noItems").fadeTo(2000, 500).slideUp(500, function() {
+								$("#noItems").slideUp(700);
+							});
+						}
+				 	});
+				}
+			}
+		}
+		
+		vm.getAll = function() {
+			MainService.getItems().then(function(items) {
+				vm.items = items;
+		 	});
+		}
+		
+		vm.getItemsByCategory = function(id) {
+			MainService.getItemsByCategory(id).then(function(items){
+				if(items != null)
+					vm.items = items;
+				else
+					$("#noItemsInCategory").show();
+			});
+		}
+		
 	};
 
 })(angular);

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,6 +50,33 @@ public class ItemController {
 	public ResponseEntity<List<ItemCategory>> getCategories() {
 		List<ItemCategory> categories = categoryService.findByParentCategoryNotNull();
 		return new ResponseEntity<List<ItemCategory>>(categories, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getItemsByName/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<Item>> getItemsByName(@PathVariable String name) {
+		List<Item> items = itemService.findAllByName(name);
+		if(!items.isEmpty())
+			return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+		else
+			return new ResponseEntity<List<Item>>(HttpStatus.BAD_REQUEST);
+	}
+
+	@RequestMapping(value = "/getItemByCode/{code}", method = RequestMethod.GET)
+	public ResponseEntity<List<Item>> getItemsByName(@PathVariable int code) {
+		List<Item> items = itemService.findAllByCode(code);
+		if(!items.isEmpty())
+			return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+		else
+			return new ResponseEntity<List<Item>>(HttpStatus.BAD_REQUEST);
+	}
+
+	@RequestMapping(value = "/getItemsByCategory/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Item>> getItemsByCategory(@PathVariable int id) {
+		List<Item> items = itemService.findAllByCategoryId(id);
+		if(!items.isEmpty())
+			return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+		else
+			return new ResponseEntity<List<Item>>(HttpStatus.BAD_REQUEST);
 	}
 
 	@RequestMapping(value = "/purchase", method = RequestMethod.POST)

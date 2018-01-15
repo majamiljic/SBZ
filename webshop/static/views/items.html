@@ -4,6 +4,25 @@
   	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	<strong>You have successfully added item to Your Shopping cart!</strong>
 </div>
+
+<div class="alert alert-warning" ng-controller="MainController" id="noItem"
+	 style="text-align: center; margin-left: 15px; margin-right: 15px">
+  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<strong>There is no item with that code.</strong>
+</div>
+
+<div class="alert alert-warning" ng-controller="MainController" id="noItems"
+	 style="text-align: center; margin-left: 15px; margin-right: 15px">
+  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<strong>There are no items with that name.</strong>
+</div>
+
+<div class="alert alert-warning" ng-controller="MainController" id="noItemsInCategory"
+	 style="text-align: center; margin-left: 15px; margin-right: 15px">
+  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<strong>Currently, there are no items in that category.</strong>
+</div>
+
 <div class="row" align="center">
 	<div class="col-sm-4" ng-repeat="item in $parent.mainCtrl.items">
 		<div class="itemDiv">

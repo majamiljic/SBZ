@@ -10,7 +10,11 @@
             	<a ng-href="/#!/main">Start Shopping</a>
             </li>
             <li ng-show="!loginCtrl.loggedUser() && !loginCtrl.seller() && !loginCtrl.manager()">
-            	<a ng-href="/#!/shoppingCart">Shopping Cart</a>
+            	<a ng-href="/#!/shoppingCart">Shopping Cart &nbsp;
+					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
+					ng-controller="ShoppingCartController as cartCtrl">
+					({{cartCtrl.shoppingCart.length}})</span>
+				</a>
             </li>
             <li ng-show="loginCtrl.manager()">
             	<a ng-href="/#!/registerSeller">Register seller</a>

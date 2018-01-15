@@ -9,8 +9,10 @@
 		
 		var calculateSubtotal = function() {
 			vm.subtotal = 0;
-			for (var i = 0; i < $localStorage.cart.length; i++)
-				vm.subtotal += $localStorage.cart[i].item.price * $localStorage.cart[i].numberOfItems;
+			if($localStorage.cart != null) {
+				for (var i = 0; i < $localStorage.cart.length; i++)
+					vm.subtotal += $localStorage.cart[i].item.price * $localStorage.cart[i].numberOfItems;
+			}
 		}
 		calculateSubtotal();
 		
