@@ -1,0 +1,27 @@
+package drools.spring.rules
+
+import sbz.project.WebShop.model.Invoice;
+import sbz.project.WebShop.model.User;
+import sbz.project.WebShop.model.UsersProfile;
+import sbz.project.WebShop.model.UsersCategory;
+import sbz.project.WebShop.model.SpendingBoundary;
+import sbz.project.WebShop.model.CategoriesWithBoundaries;
+
+rule "Bonus points"
+	agenda-group "Bonus points"
+    when
+        $i:	Invoice()
+        $c: CategoriesWithBoundaries($boundaries : spendingBoundaries)
+        $bonusDiscount: Double() from accumulate (
+        	SpendingBoundary(						// Prolazak kroz pragove potrosnje
+        		spendFrom <= $i.getTotal(),			// Ukoliko je total iznad donjeg,
+        		$i.getTotal() <= spendTo,			// a ispod gornjeg praga,
+        		$bonus : bonusPoints				// upisi u $bonus
+        	) from $boundaries,
+        	init(double bonusDis = 0;),
+        	action(bonusDis += $bonus;),			// Saberi sve bonuse i vrati to kao rezultat
+        	result(bonusDis)
+        )
+    then											// Dobijeni bonus upisujem kao ostvarene bodove
+        $i.addBonusPoints($bonusDiscount);			// u metodi u Invoice-u
+end

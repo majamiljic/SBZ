@@ -1,0 +1,85 @@
+package drools.spring.rules
+
+import java.util.Date;
+
+import sbz.project.WebShop.model.Invoice;
+import sbz.project.WebShop.model.InvoiceDiscount;
+import sbz.project.WebShop.model.InvoiceItem;
+
+global Date twoYearsLess
+
+rule "Basic discount 5% - Price over 20000"
+    lock-on-active true
+    agenda-group "Invoice discounts"
+    when
+        $i : Invoice(subtotal > 20000)
+    then
+		$i.getDiscounts().add(new InvoiceDiscount(0.05, "Basic", "Basic discount 5% - Price over 20000"));
+end
+
+rule "Bonus discount 1% - Loyal Customer"
+    lock-on-active true
+    agenda-group "Invoice discounts"
+    when
+        $i : Invoice(buyer.registrationDate < twoYearsLess)
+    then
+		$i.getDiscounts().add(new InvoiceDiscount(0.01, "Extra", "Bonus discount 1% - Loyal Customer"));
+end
+
+rule "Extra discount 1% - Gold Customer"
+    lock-on-active true
+    agenda-group "Invoice discounts"
+    when
+        $i: Invoice(buyer.usersProfile.buyerCategory.name == "Gold" )
+    then
+        $i.getDiscounts().add(new InvoiceDiscount(0.01, "Extra", "Extra discount 1% - Gold Customer"));
+end
+
+rule "Extra discount 1% - Silver Customers"
+    lock-on-active true
+    agenda-group "Invoice discounts"
+    when
+        $i: Invoice(buyer.usersProfile.buyerCategory.name == "Silver")
+    then
+        $i.getDiscounts().add(new InvoiceDiscount(0.01, "Extra", "Extra discount 1% - Silver Customers"));
+end
+
+rule "Extra discount 3% - More than 5000 dollars and 10 items"
+    lock-on-active true
+    agenda-group "Invoice discounts"
+    when
+        $i: Invoice(subtotal > 5000, invoiceItems.size() > 10)
+    then
+        $i.getDiscounts().add(new InvoiceDiscount(0.03, "Extra", "Extra discount 3% - More than 5000 dollars and 10 items"));
+end
+
+rule "Final discount"
+    lock-on-active true
+    agenda-group "Final discount"
+    when
+        $i : Invoice($invoiceDiscount : discounts)
+        $totalDiscount : Double() from accumulate (
+            InvoiceDiscount($d : discount) from $invoiceDiscount,
+            init(double discount = 0;),
+            action(discount += $d;),
+            result(discount)
+        )
+    then
+        $i.setDiscount($totalDiscount);
+end
+
+rule "Total price"
+    lock-on-active true
+    agenda-group "Final discount"
+    when
+        $i : Invoice($items : invoiceItems)
+        $total : Double() from accumulate (
+            InvoiceItem($t : totalPrice) from $items,
+            init(double price = 0;),
+            action(price += $t;),
+            result(price)
+        )
+    then
+        $i.setTotal($total);
+        $i.applyDiscount();
+end

@@ -1,0 +1,75 @@
+package drools.spring.rules
+
+import java.util.List;
+import sbz.project.WebShop.model.Invoice;
+import sbz.project.WebShop.model.InvoiceItem;
+import sbz.project.WebShop.model.ItemDiscount;
+
+rule "Basic discount - 10%"
+	agenda-group "Basic discounts"
+    when
+        $i:	Invoice($items : invoiceItems)
+        $discountItems : List() from accumulate (
+        	$it: InvoiceItem(
+        		quantity > 20,							// Ukoliko je kolicina > 20
+        		item.category.isConsGood == false		// i proizvod ne pripada robi siroke potrosnje
+          	) from $items,
+        	collectList($it)
+        )
+    then
+        for (int i = 0; i < $discountItems.size(); i++)
+    		((InvoiceItem) $discountItems.get(i)).getDiscounts().add(
+    		new ItemDiscount(0.1, "Basic", "Basic discount 10% - More than 20 items"));
+end
+
+rule "Basic discount - 5%"
+	agenda-group "Basic discounts"
+    when
+        $i:	Invoice( $items : invoiceItems )
+        $discountItems : List() from accumulate (
+        	$it: InvoiceItem(
+        		quantity > 5,		// Ukoliko je kolicina > 5 i kategorija proizvoda je TV, Lap top ili Comp
+        		item.category.name == "TV" || item.category.name == "Computers" || item.category.name == "Lap Tops"
+          	) from $items,
+        	collectList($it)
+        )
+    then
+        for (int i = 0; i < $discountItems.size(); i++)
+    		((InvoiceItem) $discountItems.get(i)).getDiscounts().add(
+    		new ItemDiscount(0.05, "Basic", "Basic discount 5% - More than 5 items"));
+end
+
+rule "Basic discount - 7%"
+	agenda-group "Basic discounts"
+    when
+        $i:	Invoice( $items : invoiceItems )
+        $discountItems : List() from accumulate (
+        	$it: InvoiceItem(
+        		subtotalPrice > 500,				// Ukoliko je ukupna cena stavke > 500
+        		item.category.isConsGood == true	// i proizvod pripada robi siroke potrosnje
+          	) from $items,
+        	collectList($it)
+        )
+    then
+        for (int i = 0; i < $discountItems.size(); i++)
+    		((InvoiceItem) $discountItems.get(i)).getDiscounts().add(
+    		new ItemDiscount(0.07, "Basic", "Basic discount 7% - More than 500 dollars"));
+end
+
+rule "Basic discount - check"
+	agenda-group "Basic discounts check"
+    when
+    	$i:	InvoiceItem($discounts : discounts)
+        $maxItemDiscount : ItemDiscount() from accumulate (
+        	$j: ItemDiscount() from $discounts,							// Prolazim kroz sve popuste invoice itema
+        	init(ItemDiscount max = null;),								// inicijalno postavljam max na null
+        	action(
+        	if (max == null || max.getDiscount() < $j.getDiscount())	// Ako je trenutni popust veci od max,
+        		max = $j;												// smesti njega u max i ga kao rezultat
+        	),
+        	result(max)
+        )
+    then
+    	$i.getDiscounts().clear();										// Clearujem sve popuste
+    	$i.getDiscounts().add($maxItemDiscount);						// i postavljam samo najpovoljniji
+end

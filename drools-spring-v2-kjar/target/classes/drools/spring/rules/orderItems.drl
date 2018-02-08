@@ -1,0 +1,20 @@
+package drools.spring.rules
+
+import java.util.List;
+
+import sbz.project.WebShop.model.Item;
+import sbz.project.WebShop.model.Items;
+
+rule "Order items"
+	agenda-group "Order items"
+    when
+        $i:	Items($items : items)
+        $itemsForOrder : List() from accumulate (
+        	$p : Item(stockStatus <= minStockStatus) from $items,
+        	collectList($p)
+        )
+    then
+    	for(int i = 0; i < $itemsForOrder.size(); i++)
+    		((Item) $itemsForOrder.get(i)).setRefill("Yes");
+        $i.setItems($itemsForOrder);
+end

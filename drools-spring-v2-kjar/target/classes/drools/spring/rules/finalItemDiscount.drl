@@ -1,0 +1,24 @@
+package drools.spring.rules
+
+import sbz.project.WebShop.model.InvoiceItem;
+import sbz.project.WebShop.model.Item;
+import sbz.project.WebShop.model.ItemCategory;
+import sbz.project.WebShop.model.ItemDiscount;
+
+rule "Final item discount"
+	agenda-group "Final item discount"
+    when
+        $ii : InvoiceItem ($itemDisc : discounts)
+        $totalDiscount : Double() from accumulate (
+        	ItemDiscount($discount : discount) from $itemDisc,					// 1. Add all discounts
+        	init(double discount = 0;),
+        	action(discount += $discount;),
+        	result(discount)
+        )
+    then
+    	if ($totalDiscount < $ii.getItem().getCategory().getMaxDiscount())		// 2. Check Max Discount
+    		$ii.setDiscount($totalDiscount);									// 3. If it is ok, set Discount
+    	else
+    		$ii.setDiscount($ii.getItem().getCategory().getMaxDiscount());		// 3. Else set Max Discount
+        $ii.applyDiscount();
+end

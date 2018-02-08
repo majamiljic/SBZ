@@ -1,0 +1,82 @@
+<meta charset="UTF-8">
+
+<div class="mainDiv">
+	<div class="alert alert-danger" id="declined"
+		 style="text-align: center; margin-left: 15px; margin-right: 15px">
+	  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>There is not enough items in stock!</strong>
+	</div>
+	<div class="alert alert-success" id="approved"
+		 style="text-align: center; margin-left: 15px; margin-right: 15px">
+	  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Invoice successfully approved!</strong>
+	</div>
+	
+	<div class="alert alert-success" id="cancelled"
+		 style="text-align: center; margin-left: 15px; margin-right: 15px">
+	  	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>invoice successfully declined!</strong>
+	</div>
+	
+	<h2 style="text-align: center">
+		<b>Invoices</b>
+	</h2>
+	<br>
+	
+	<h3 ng-if="sellerCtrl.orderedInvoices[0] == null" style="text-align: center">
+		Currently, there are no invoice requests.
+	</h3>
+
+	<div class="row" align="center" ng-repeat="invoice in sellerCtrl.orderedInvoices">
+		<div class="itemDiv" style="margin-left: 20px; margin-right: 20px; padding: 15px">
+			<div class="descriptionDiv" style="width: 100%">
+				<p class="invoiceInfoDiv">
+					<b style="color: orange;">
+						Invoice {{invoice.id}}
+					</b><br>
+					<b>Status: </b> {{invoice.invoiceStatus}} 		<br>
+					<b>Subtotal: </b> {{invoice.subtotal}} $		<br>
+					<b>Discount: </b> {{invoice.discount * 100}}%	<br>
+					<b>Total: </b> {{invoice.total.toFixed(2)}} $	<br>
+					<br>
+					<button type="submit" class="btn btn-success" ng-click="sellerCtrl.approve(invoice.id)">
+						<b>Approve</b>
+					</button>
+					&nbsp;
+					<button type="submit" class="btn btn-danger" ng-click="sellerCtrl.decline(invoice.id)">
+						<b>Decline</b>
+					</button>
+				</p>
+				<table class="table" style="display: inline-block; float: right; font-size: 14px; width:70%">
+					<tr>
+						<th>Number</th>
+						<th>Name</th>
+						<th>Category</th>
+						<th>Price</th>
+						<th>Qty</th>
+						<th>Subtotal</th>
+						<th>Discount</th>
+						<th>Total</th>
+						<th>Disc names</th>
+					</tr>
+					<tr ng-repeat="element in invoice.invoiceItems">
+						<td>{{element.invoiceItemNumber}}</td>
+						<td>{{element.item.name}}</td>
+						<td>{{element.item.category.name}}</td>
+						<td>{{element.item.price}} $</td>
+						<td>{{element.quantity}}</td>
+						<td>{{element.subtotalPrice}} $</td>
+						<td>{{(element.discount * 100).toFixed(0)}}%</td>
+						<td>{{element.totalPrice.toFixed(2)}} $</td>
+						<td>
+							<span ng-repeat="disc in element.discounts">
+								- {{disc.name}}<br />
+							</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<br>
+</div>

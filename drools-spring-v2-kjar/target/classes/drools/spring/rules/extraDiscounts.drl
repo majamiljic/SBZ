@@ -1,0 +1,87 @@
+package drools.spring.rules
+
+import sbz.project.WebShop.model.Invoice;
+import sbz.project.WebShop.model.InvoiceItem;
+import sbz.project.WebShop.model.Item;
+import sbz.project.WebShop.model.ItemDiscount;
+import sbz.project.WebShop.model.SpecialOffer;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+rule "Extra discount - 2%"
+	agenda-group "Extra discount 2"
+    when
+        $i: Invoice($items: invoiceItems)
+        $it: InvoiceItem()
+        $itemDiscount: ItemDiscount() from accumulate (
+        	$itL: InvoiceItem() from $items,
+        	init(												
+        		ItemDiscount discount = null;					
+	        	Calendar calendar = GregorianCalendar.getInstance();
+	        	calendar.add(Calendar.DATE, -15);
+	        	Date date15 = calendar.getTime();
+	        ),
+        	action(
+				// Za svaki proizvod sa trenutnog racuna
+				// proveri da li se pojavljivao u racunima
+				// koji su formirani u prethodnih 15 dana
+        		if(discount == null && $i.getDate().compareTo(date15) >= 0
+        		&& $itL.getItem().getId() == $it.getItem().getId()) {
+        			discount = new ItemDiscount(0.02, "Extra", "Bonus discount 2% - last 15 days");
+        		}
+        	),
+        	result(discount)
+        )
+    then
+        $it.getDiscounts().add($itemDiscount);
+end
+
+rule "Extra discount - 1%"
+	agenda-group "Extra discount 1"
+    when
+        $i: Invoice($items: invoiceItems)
+        $it: InvoiceItem()
+        $itemDiscount: ItemDiscount() from accumulate (
+        	$itL: InvoiceItem() from $items,
+        	init(
+        		ItemDiscount discount = null;
+	        	Calendar cal = GregorianCalendar.getInstance();
+	        	cal.add(Calendar.DATE, -30);
+	        	Date date30 = cal.getTime();
+	        ),
+        	action(
+				// Za svaki proizvod sa trenutnog racuna
+				// proveri da li se proizvod iz kategorije kojoj on pripada
+				// pojavljivao u racunima koji su formirani u prethodnih 30 dana
+        		if(discount == null && $i.getDate().compareTo(date30) >= 0
+        		&& $itL.getItem().getCategory().getId() == $it.getItem().getCategory().getId()) {
+        			discount = new ItemDiscount(0.01, "Extra", "Bonus discount 1% - last 30 days");
+        		}
+        	),
+        	result(discount)
+        )
+    then
+        $it.getDiscounts().add($itemDiscount);
+end
+
+rule "Extra discount - Special Offer"
+	agenda-group "Extra discount - Special Offer"
+    when
+        $ii: InvoiceItem()
+        $itemDiscount: ItemDiscount() from accumulate (
+        	$so: SpecialOffer() from $ii.getItem().getCategory().getSpecialOffers(),
+        	init(ItemDiscount discount = null;),
+        	action(
+				// Za svaki proizvod sa trenutnog racuna
+				// proveri da li se njegova kategorija nalazi u akcijskom dogadjaju
+				// i ako da, setuj mu popust u iznosu popusta tog akcijskog dogadjaja
+	        	if(discount == null) {
+	        		discount = new ItemDiscount($so.getDiscount(), "Extra", "Extra discount - Special Offer");
+	        	}
+	        ),
+        	result(discount)
+        )
+    then
+        $ii.getDiscounts().add($itemDiscount);
+end

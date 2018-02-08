@@ -1,0 +1,29 @@
+<meta charset="UTF-8">
+
+<div class="row" align="center">
+	<div class="col-sm-4" ng-repeat="item in $parent.mainCtrl.items">
+		<div class="itemDiv">
+			<img src="img/2.jpg" style="border-radius: 15px;">
+			<div class="descriptionDiv">
+				<p>
+					<b style="color:orange"> {{item.name}} </b>
+					<br>
+					<b>Code:</b> {{item.code}}				<br>
+					<b>Category:</b> {{item.category.name}}	<br>
+					<b>Price:</b> {{item.price}} €			<br>
+					<b>Max Discount:</b> {{item.category.maxDiscount}}%	<br>
+				</p>
+				<form>
+					<input type="number" class="form-control" min="1" max="999"
+					style="width: 25%; float: left; margin-left: 10%" value="1"
+					id="numberOfItems{{item.id}}">
+					<button type="submit" class="btn btn-default" style="float: right; margin-right: 10%"
+					ng-click="$parent.mainCtrl.addToCart(item)" id="addToCartButton{{item.id}}">
+						<b>Add to cart</b> &nbsp;
+						<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
